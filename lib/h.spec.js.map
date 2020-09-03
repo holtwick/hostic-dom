@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/h.spec.js"],
+  "sourcesContent": ["import { hArgumentParser } from './h.js'\n\ndescribe('h', () => {\n\n  it('should flatten', () => {\n    let values = hArgumentParser('div', ['a', ['b', ['c', 'd'], 'e']])\n    expect(values).toEqual({\n      'attrs': {},\n      'children': [\n        'a',\n        'b',\n        'c',\n        'd',\n        'e',\n      ],\n      'tag': 'div',\n    })\n  })\n\n  it('should handle attrs', () => {\n    let values = hArgumentParser('div', {\n      attrs: {\n        a: 1,\n        b: 2,\n      },\n      c: 3,\n      d: 4,\n    }, 'a', 'b')\n    expect(values).toEqual({\n      'attrs': {\n        'a': 1,\n        'b': 2,\n        'c': 3,\n        'd': 4,\n      },\n      'children': [\n        'a',\n        'b',\n      ],\n      'tag': 'div',\n    })\n  })\n\n})\n"],
+  "mappings": "AAAA;AAEA,SAAS,KAAK;AAEZ,KAAG,kBAAkB;AACnB,QAAI,SAAS,gBAAgB,OAAO,CAAC,KAAK,CAAC,KAAK,CAAC,KAAK,MAAM;AAC5D,WAAO,QAAQ,QAAQ;AAAA,MACrB,OAAS;AAAA,MACT,UAAY;AAAA,QACV;AAAA,QACA;AAAA,QACA;AAAA,QACA;AAAA,QACA;AAAA;AAAA,MAEF,KAAO;AAAA;AAAA;AAIX,KAAG,uBAAuB;AACxB,QAAI,SAAS,gBAAgB,OAAO;AAAA,MAClC,OAAO;AAAA,QACL,GAAG;AAAA,QACH,GAAG;AAAA;AAAA,MAEL,GAAG;AAAA,MACH,GAAG;AAAA,OACF,KAAK;AACR,WAAO,QAAQ,QAAQ;AAAA,MACrB,OAAS;AAAA,QACP,GAAK;AAAA,QACL,GAAK;AAAA,QACL,GAAK;AAAA,QACL,GAAK;AAAA;AAAA,MAEP,UAAY;AAAA,QACV;AAAA,QACA;AAAA;AAAA,MAEF,KAAO;AAAA;AAAA;AAAA;",
+  "names": []
+}

@@ -2,9 +2,9 @@
   "name": "hostic-dom",
   "version": "0.1.0",
   "description": "Lightweight virtual DOM",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "build:cli": "node src/cli-builder.js",
+    "build": " esbuild --outdir=lib --target=node12 --target=node12 --sourcemap --jsx-factory=h --loader:.js=jsx src/*.js",
     "test": "jest --no-cache"
   },
   "author": {
@@ -18,17 +18,11 @@
   },
   "license": "MIT",
   "jest": {
-    "transform": {
-      "^.+\\.jsx?$": "./src/jest-transform.js"
-    },
     "testEnvironment": "node",
     "testPathIgnorePatterns": [
       "node_modules/",
       "dist/"
     ]
-  },
-  "bin": {
-    "hostic-dom": "./src/cli.js"
   },
   "bugs": {
     "url": "https://github.com/holtwick/hostic-dom/issues"
@@ -37,12 +31,12 @@
   "dependencies": {
     "css-what": "^3.3.0",
     "debug": "^4.1.1",
-    "esbuild": "^0.6.29",
     "he": "^1.2.0",
-    "htmlparser2": "^4.1.0",
-    "source-map-support": "^0.5.19"
+    "htmlparser2": "^4.1.0"
   },
   "devDependencies": {
+    "source-map-support": "^0.5.19",
+    "esbuild": "^0.6.29",
     "jest": "^26.4.2"
   },
   "engines": {

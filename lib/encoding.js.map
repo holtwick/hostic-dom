@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/encoding.js"],
+  "sourcesContent": ["// Copyright (c) 2020 Dirk Holtwick. All rights reserved. https://holtwick.de/copyright\n\nconst rxEscape = /[\\-\\[\\]\\/{}()*+?.^$|]/g\n\nexport function escapeRegExp(value) {\n  if (!value) return ''\n  if (value instanceof RegExp) {\n    return value.source\n  }\n  return value.replace(rxEscape, '\\\\$&')\n}\n\nexport {\n  escape as escapeHTML,\n  unescape as unescapeHTML,\n} from 'he'\n\n// export function escapeHTML(s) {\n//   if (!s) return s\n//   return s\n//     .replace(/&/g, '&amp;')\n//     .replace(/</g, '&lt;')\n//     .replace(/>/g, '&gt;')\n//     .replace(/'/g, '&apos;')\n//     .replace(/\"/g, '&quot;')\n// }\n//\n// export function unescapeHTML(s) {\n//   if (!s) return s\n//   return s\n//     .replace(/&lt;/gi, '<')\n//     .replace(/&gt;/gi, '>')\n//     .replace(/&quot;/gi, '\"')\n//     .replace(/&apos;/gi, '\\'')\n//     .replace(/&amp;/gi, '&')\n// }\n\n"],
+  "mappings": "AAEA,MAAM,WAAW;AAEV,6BAAsB;AAC3B,MAAI,CAAC;AAAO,WAAO;AACnB,MAAI,iBAAiB;AACnB,WAAO,MAAM;AAAA;AAEf,SAAO,MAAM,QAAQ,UAAU;AAAA;AAGjC;AAAA;AAAA;AAAA;",
+  "names": []
+}

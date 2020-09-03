@@ -6,10 +6,7 @@
  *
  */
 
-const log = require('debug')('hostic:h')
-
 function _h(context, tag, attrs, children) {
-  // console.log('_h', { context, tag, attrs, children })
   if (typeof tag === 'function') {
     return tag.call(null, {
       props: { ...attrs, children },
@@ -75,7 +72,6 @@ function _h(context, tag, attrs, children) {
 }
 
 export function hArgumentParser(tag, attrs, ...children) {
-  // console.log('parser', { tag, attrs, children })
   if (typeof tag === 'object') {
     tag = 'fragment'
     children = tag.children

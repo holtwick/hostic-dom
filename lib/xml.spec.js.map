@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/xml.spec.js"],
-  "sourcesContent": ["// Copyright (c) 2020 Dirk Holtwick. All rights reserved. https://holtwick.de/copyright\n\nimport { h } from './xml'\n\ndescribe('HTML', () => {\n\n  it('should xml', () => {\n    let s = h('a', {\n        href: 'example.com',\n        empty: null,\n        x: true,\n        false: false,\n      },\n      h('hr'),\n      h('b', {}, 'Welcome'))\n    expect(s).toEqual('<a href=\"example.com\" x=\"x\"><hr /><b>Welcome</b></a>')\n  })\n\n  it('should use JSX', () => {\n    let spread = {\n      title: 'Hello',\n      id: 'greeting',\n    }\n    let s = <a href=\"example.com\" x {...spread}>\n      <hr/>\n      <b>Welcome</b></a>\n    expect(s).toEqual('<a href=\"example.com\" x=\"x\" title=\"Hello\" id=\"greeting\"><hr /><b>Welcome</b></a>')\n  })\n\n})\n"],
-  "mappings": "AAEA;AAEA,SAAS,QAAQ;AAEf,KAAG,cAAc;AACf,QAAI,IAAI,EAAE,KAAK;AAAA,MACX,MAAM;AAAA,MACN,OAAO;AAAA,MACP,GAAG;AAAA,MACH,OAAO;AAAA,OAET,EAAE,OACF,EAAE,KAAK,IAAI;AACb,WAAO,GAAG,QAAQ;AAAA;AAGpB,KAAG,kBAAkB;AACnB,QAAI,SAAS;AAAA,MACX,OAAO;AAAA,MACP,IAAI;AAAA;AAEN,QAAI,IAAI,kBAAC,KAAD;AAAA,MAAG,MAAK;AAAA,MAAc,GAAC;AAAA,SAAK;AAAA,OAClC,kBAAC,MAAD,OACA,kBAAC,KAAD,MAAG;AACL,WAAO,GAAG,QAAQ;AAAA;AAAA;",
-  "names": []
-}

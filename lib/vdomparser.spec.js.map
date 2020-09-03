@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/vdomparser.spec.js"],
-  "sourcesContent": ["// Copyright (c) 2020 Dirk Holtwick. All rights reserved. https://holtwick.de/copyright\n\nimport { parseHTML } from './vdomparser'\n\ndescribe('VDOM Parser', () => {\n\n  it('should work with js', () => {\n    const html = 'Xyz <script type=\"text/javascript\">var foo = \\'<<bar>>\\';</script>'\n    let frag = parseHTML(html)\n    let rhtml = frag.render()\n    expect(rhtml).toBe('Xyz <script type=\"text/javascript\">var foo = \\'<<bar>>\\';</script>')\n    expect(rhtml).toBe(html)\n  })\n\n  it('should respect nested', () => {\n    const html = '<div><h1>Test</h1><p>Lorem <a href=\"#\" style=\"font-wAIGHT: bold;;\">ipsum</a></p></div>'\n    let frag = parseHTML(html)\n    let rhtml = frag.render()\n    // expect(rhtml).toBe('Xyz <script type=\"text/javascript\">var foo = \\'<<bar>>\\';</script>')\n    expect(rhtml).toBe(html)\n  })\n\n})\n"],
-  "mappings": "AAEA;AAEA,SAAS,eAAe;AAEtB,KAAG,uBAAuB;AACxB,UAAM,OAAO;AACb,QAAI,OAAO,UAAU;AACrB,QAAI,QAAQ,KAAK;AACjB,WAAO,OAAO,KAAK;AACnB,WAAO,OAAO,KAAK;AAAA;AAGrB,KAAG,yBAAyB;AAC1B,UAAM,OAAO;AACb,QAAI,OAAO,UAAU;AACrB,QAAI,QAAQ,KAAK;AAEjB,WAAO,OAAO,KAAK;AAAA;AAAA;",
-  "names": []
-}

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/xml.js"],
-  "sourcesContent": ["import { markup } from './html.js'\nimport { hArgumentParser } from './h.js'\n\nexport function xml(itag, iattrs, ...ichildren) {\n  let { tag, attrs, children } = hArgumentParser(itag, iattrs, ichildren)\n  return markup(true, tag, attrs, children)\n}\n\nxml.firstLine = '<?xml version=\"1.0\" encoding=\"utf-8\"?>'\nxml.xml = true\n\nexport let h = xml\n"],
-  "mappings": "AAAA;AACA;AAEO,oBAAa,MAAM,WAAW;AACnC,MAAI,CAAE,KAAK,OAAO,YAAa,gBAAgB,MAAM,QAAQ;AAC7D,SAAO,OAAO,MAAM,KAAK,OAAO;AAAA;AAGlC,IAAI,YAAY;AAChB,IAAI,MAAM;AAEH,WAAI,IAAI;",
-  "names": []
-}

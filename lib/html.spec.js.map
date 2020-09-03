@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/html.spec.js"],
-  "sourcesContent": ["// Copyright (c) 2020 Dirk Holtwick. All rights reserved. https://holtwick.de/copyright\n\nimport { html as h } from './html'\n\ndescribe('HTML', () => {\n\n  it('should generate a string', () => {\n    let s = h('a', { href: 'example.com' }, 'Welcome')\n    expect(s).toEqual('<a href=\"example.com\">Welcome</a>')\n  })\n\n  it('should nest', () => {\n    let s = h('a', { href: 'example.com' },\n      h('hr'),\n      h('b', {}, 'Welcome'))\n    expect(s).toEqual('<a href=\"example.com\"><hr><b>Welcome</b></a>')\n  })\n\n  it('should use JSX', () => {\n    let spread = {\n      title: 'Hello',\n      id: 'greeting',\n    }\n    let s = <a href=\"example.com\" x=\"x\" hidden={false} {...spread}>\n      <hr/>\n      {null && 'This is invisible'}\n      <b>Welcome</b></a>\n    expect(s).toEqual('<a href=\"example.com\" x=\"x\" title=\"Hello\" id=\"greeting\"><hr><b>Welcome</b></a>')\n  })\n\n})\n"],
-  "mappings": "AAEA;AAEA,SAAS,QAAQ;AAEf,KAAG,4BAA4B;AAC7B,QAAI,IAAI,EAAE,KAAK,CAAE,MAAM,gBAAiB;AACxC,WAAO,GAAG,QAAQ;AAAA;AAGpB,KAAG,eAAe;AAChB,QAAI,IAAI,EAAE,KAAK,CAAE,MAAM,gBACrB,EAAE,OACF,EAAE,KAAK,IAAI;AACb,WAAO,GAAG,QAAQ;AAAA;AAGpB,KAAG,kBAAkB;AACnB,QAAI,SAAS;AAAA,MACX,OAAO;AAAA,MACP,IAAI;AAAA;AAEN,QAAI,IAAI,kBAAC,KAAD;AAAA,MAAG,MAAK;AAAA,MAAc,GAAE;AAAA,MAAI,QAAQ;AAAA,SAAW;AAAA,OACrD,kBAAC,MAAD,OACC,MACD,kBAAC,KAAD,MAAG;AACL,WAAO,GAAG,QAAQ;AAAA;AAAA;",
-  "names": []
-}

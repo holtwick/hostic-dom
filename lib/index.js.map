@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/index.js"],
-  "sourcesContent": ["export * from './vdom.js'\nexport * from './vdomparser.js'\nexport * from './encoding.js'\n\nexport { CDATA, html } from './html.js'\nexport { xml } from './xml.js'\n"],
-  "mappings": "AAAA;AACA;AACA;AAEA;AACA;",
-  "names": []
-}

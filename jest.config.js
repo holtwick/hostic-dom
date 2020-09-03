@@ -1,12 +1,16 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  'testPathIgnorePatterns': [
-    'node_modules/',
-    'dist/',
-  ],
   transform: {
     '^.+\\.[jt]sx?$': 'ts-jest',
   },
-  moduleFileExtensions: ['ts', 'js']
+  'globals': {
+    'ts-jest': {
+      'tsConfig': './tsconfig.json',
+    },
+  },
+  transformIgnorePatterns: [
+    "[/\\\\]node_modules[/\\\\](?!lodash-es/).+\\.js$"
+  ],
+  moduleFileExtensions: ['ts', 'js', 'tsx', 'jsx']
 }

@@ -48,8 +48,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "test": "ts-node test/test.ts",
-    "pretest": "npm run build"
+    "test": "jest"
   },
   "files": [
     "dist"

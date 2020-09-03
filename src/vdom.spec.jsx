@@ -1,16 +1,5 @@
 "use strict";
 // Copyright (c) 2020 Dirk Holtwick. All rights reserved. https://holtwick.de/copyright
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 exports.__esModule = true;
 // import Sizzle from './sizzle'
 var vdom_1 = require("./vdom");
@@ -63,64 +52,69 @@ describe('VDOM', function () {
             title: 'Hello',
             id: 'greeting'
         };
-        var s = vdom_1.h("a", __assign({ href: "example.com", x: "x", hidden: false, onClick: "return false" }, spread),
-            vdom_1.h("hr", null),
-            null && 'This is invisible',
-            vdom_1.h("b", null, "Welcome"));
+        var s = <a href="example.com" x="x" hidden={false} onClick="return false" {...spread}>
+      <hr />
+      {null && 'This is invisible'}
+      <b>Welcome</b></a>;
         expect(s.render()).toEqual('<a href="example.com" x="x" onclick="return false" title="Hello" id="greeting"><hr><b>Welcome</b></a>');
         expect(s.render(xml_js_1.xml)).toEqual('<a href="example.com" x="x" onclick="return false" title="Hello" id="greeting"><hr /><b>Welcome</b></a>');
     });
     it('should nested JSX', function () {
-        var content = vdom_1.h("div", null, "Hello");
+        var content = <div>Hello</div>;
         var title = 'World';
-        var doc = vdom_1.h("body", null,
-            vdom_1.h("h1", null, title),
-            content);
+        var doc = <body>
+    <h1>{title}</h1>
+    {content}
+    </body>;
         expect(doc.render()).toBe('<body><h1>World</h1><div>Hello</div></body>');
     });
     it('should JSX components', function () {
         function Welcome(_a) {
             var props = _a.props, h = _a.h;
-            return h("h1", null,
-                "Hello, ",
-                props.name);
+            return <h1>Hello, {props.name}</h1>;
         }
         // @ts-ignore
-        var x = vdom_1.h(Welcome, { name: "Sara" });
+        var x = <Welcome name="Sara"/>;
         expect(x.render()).toEqual('<h1>Hello, Sara</h1>');
     });
     it('should JSX class magic', function () {
-        var x = vdom_1.h("div", { className: {
-                '-active': true,
-                'foo': 'bar',
-                'bar': '',
-                'hidden': null,
-                'name': 1
-            } }, "...");
+        var x = <div className={{
+            '-active': true,
+            'foo': 'bar',
+            'bar': '',
+            'hidden': null,
+            'name': 1
+        }}>...</div>;
         expect(x.render()).toEqual('<div class="-active foo name">...</div>');
     });
     it('should support fragments', function () {
-        var ff = vdom_1.h("fragment", null,
-            vdom_1.h("div", null, "One"),
-            "Middle",
-            vdom_1.h("div", null, "Two"));
+        var ff = <fragment>
+      <div>One</div>
+      Middle
+      <div>Two</div>
+    </fragment>;
         expect(ff).toBeInstanceOf(vdom_1.VDocumentFragment);
         expect(ff.render()).toEqual('<div>One</div>Middle<div>Two</div>');
     });
     it('should remove', function () {
-        var el = vdom_1.h("div", null,
-            vdom_1.h("div", { id: "a" }),
-            vdom_1.h("div", { id: "b" },
-                "Before",
-                vdom_1.h("link", { rel: "stylesheet", href: "" }),
-                vdom_1.h("span", null, "After")));
+        var el = <div>
+      <div id="a">
+      </div>
+      <div id="b">
+        Before
+        <link rel="stylesheet" href=""/>
+        <span>After</span>
+      </div>
+    </div>;
         expect(el.render()).toEqual('<div><div id="a"></div><div id="b">Before<link rel="stylesheet" href=""><span>After</span></div></div>');
         var a = el.querySelector('#a');
         el.handle('link', function (e) { return a.appendChild(e); });
         expect(el.render()).toEqual('<div><div id="a"><link rel="stylesheet" href=""></div><div id="b">Before<span>After</span></div></div>');
     });
     it('should handle dataSet stuff', function () {
-        var el = vdom_1.h("div", { "data-lang": "en" }, "Test");
+        var el = <div data-lang="en">
+      Test
+    </div>;
         expect(el.attributes).toEqual({ 'data-lang': 'en' });
         expect(el.render()).toEqual('<div data-lang="en">Test</div>');
         expect(el.querySelector('[data-lang]').textContent).toEqual('Test');
@@ -129,13 +123,14 @@ describe('VDOM', function () {
         expect(frag.render()).toEqual('<div data-lang="en">Test</div>');
     });
     it('should insert', function () {
-        var el = vdom_1.h("div", null,
-            vdom_1.h("p", null, "Hallo"));
-        var w = vdom_1.h("h1", null, "Welcome");
+        var el = <div>
+      <p>Hallo</p>
+    </div>;
+        var w = <h1>Welcome</h1>;
         el.insertBefore(w);
         expect(el.render()).toEqual('<div><h1>Welcome</h1><p>Hallo</p></div>');
         el.insertBefore(w, w); // fail
-        el.insertBefore(vdom_1.h("div", null, "Subtitle"), el.querySelector('p'));
+        el.insertBefore(<div>Subtitle</div>, el.querySelector('p'));
         expect(el.render()).toEqual('<div><h1>Welcome</h1><div>Subtitle</div><p>Hallo</p></div>');
     });
 });

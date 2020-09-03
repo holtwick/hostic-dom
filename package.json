@@ -24,6 +24,10 @@
       "dist/"
     ]
   },
+  "funding": {
+    "type": "GitHub Sponsors ❤",
+    "url": "https://github.com/sponsors/holtwick"
+  },
   "bugs": {
     "url": "https://github.com/holtwick/hostic-dom/issues"
   },

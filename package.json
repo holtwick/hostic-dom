@@ -1,0 +1,51 @@
+{
+  "name": "hostic-dom",
+  "version": "0.1.0",
+  "description": "Lightweight virtual DOM",
+  "main": "src/index.js",
+  "scripts": {
+    "build:cli": "node src/cli-builder.js",
+    "test": "jest --no-cache"
+  },
+  "author": {
+    "name": "Dirk Holtwick",
+    "email": "dirk.holtwick@gmail.com",
+    "url": "https://holtwick.de"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/holtwick/hostic-dom.git"
+  },
+  "license": "MIT",
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "./src/jest-transform.js"
+    },
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "node_modules/",
+      "dist/"
+    ]
+  },
+  "bin": {
+    "hostic-dom": "./src/cli.js"
+  },
+  "bugs": {
+    "url": "https://github.com/holtwick/hostic-dom/issues"
+  },
+  "homepage": "https://github.com/holtwick/hostic-dom",
+  "dependencies": {
+    "css-what": "^3.3.0",
+    "debug": "^4.1.1",
+    "esbuild": "^0.6.29",
+    "he": "^1.2.0",
+    "htmlparser2": "^4.1.0",
+    "source-map-support": "^0.5.19"
+  },
+  "devDependencies": {
+    "jest": "^26.4.2"
+  },
+  "engines": {
+    "node": ">=12"
+  }
+}

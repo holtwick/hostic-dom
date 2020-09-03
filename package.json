@@ -2,11 +2,6 @@
   "name": "hostic-dom",
   "version": "0.1.0",
   "description": "Lightweight virtual DOM",
-  "main": "lib/index.js",
-  "scripts": {
-    "build": " esbuild --outdir=lib --target=node12 --target=node12 --sourcemap --jsx-factory=h --loader:.js=jsx src/*.js",
-    "test": "jest --no-cache"
-  },
   "author": {
     "name": "Dirk Holtwick",
     "email": "dirk.holtwick@gmail.com",
@@ -17,13 +12,6 @@
     "url": "https://github.com/holtwick/hostic-dom.git"
   },
   "license": "MIT",
-  "jest": {
-    "testEnvironment": "node",
-    "testPathIgnorePatterns": [
-      "node_modules/",
-      "dist/"
-    ]
-  },
   "funding": {
     "type": "GitHub Sponsors ❤",
     "url": "https://github.com/sponsors/holtwick"
@@ -35,15 +23,35 @@
   "dependencies": {
     "css-what": "^3.3.0",
     "debug": "^4.1.1",
-    "he": "^1.2.0",
     "htmlparser2": "^4.1.0"
-  },
-  "devDependencies": {
-    "source-map-support": "^0.5.19",
-    "esbuild": "^0.6.29",
-    "jest": "^26.4.2"
   },
   "engines": {
     "node": ">=12"
-  }
+  },
+  "main": "dist/hostic-dom.cjs.js",
+  "module": "dist/hostic-dom.esm.js",
+  "browser": "dist/hostic-dom.umd.js",
+  "devDependencies": {
+    "@rollup/plugin-json": "^4.1.0",
+    "@types/jest": "^26.0.13",
+    "@types/ms": "^0.7.31",
+    "jest": "^26.4.2",
+    "rollup": "^2.26.9",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-typescript": "^1.0.1",
+    "ts-jest": "^26.3.0",
+    "ts-node": "^9.0.0",
+    "tslib": "^2.0.1",
+    "typescript": "^4.0.2"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "ts-node test/test.ts",
+    "pretest": "npm run build"
+  },
+  "files": [
+    "dist"
+  ]
 }

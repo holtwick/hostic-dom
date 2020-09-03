@@ -1,4 +1,4 @@
-import parse from 'css-what'
+import { parse } from 'css-what'
 
 let cache = {}
 

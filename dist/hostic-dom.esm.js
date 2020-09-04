@@ -1,4 +1,4 @@
-import parse from 'css-what';
+import { parse } from 'css-what';
 import { Parser } from 'htmlparser2';
 
 // Copyright (c) 2020 Dirk Holtwick. All rights reserved. https://holtwick.de/copyright
@@ -94,6 +94,7 @@ function hArgumentParser(tag, attrs, ...children) {
   return {
     tag,
     attrs,
+    // @ts-ignore
     children: children.flat(Infinity),
   }
 }

@@ -1,26 +1,30 @@
 // @ts-nocheck
-import resolve from 'rollup-plugin-node-resolve'
-import commonjs from 'rollup-plugin-commonjs'
-import json from '@rollup/plugin-json'
+// import resolve from 'rollup-plugin-node-resolve'
+// import commonjs from 'rollup-plugin-commonjs'
+// import json from '@rollup/plugin-json'
 import typescript from 'rollup-plugin-typescript'
 import pkg from './package.json'
 
 export default [
+
+  // package.json
+  //  "browser": "dist/hostic-dom.umd.js",
+
   // browser-friendly UMD build
-  {
-    input: 'src/index.js',
-    output: {
-      name: pkg.name,
-      file: pkg.browser,
-      format: 'umd',
-    },
-    plugins: [
-      resolve(),   // so Rollup can find `ms`
-      commonjs(),  // so Rollup can convert `ms` to an ES module
-      json(),
-      typescript(), // so Rollup can convert TypeScript to JavaScript
-    ],
-  },
+  // {
+  //   input: 'src/index.js',
+  //   output: {
+  //     name: pkg.name,
+  //     file: pkg.browser,
+  //     format: 'umd',
+  //   },
+  //   plugins: [
+  //     resolve(),   // so Rollup can find `ms`
+  //     commonjs(),  // so Rollup can convert `ms` to an ES module
+  //     json(),
+  //     typescript(), // so Rollup can convert TypeScript to JavaScript
+  //   ],
+  // },
 
   // CommonJS (for Node) and ES module (for bundlers) build.
   // (We could have three entries in the configuration array
@@ -32,6 +36,12 @@ export default [
     input: 'src/index.js',
     external: ['ms'],
     plugins: [
+      // resolve({
+      //   // pass custom options to the resolve plugin
+      //   customResolveOptions: {
+      //     moduleDirectory: 'node_modules'
+      //   }
+      // }),
       typescript(), // so Rollup can convert TypeScript to JavaScript
     ],
     output: [

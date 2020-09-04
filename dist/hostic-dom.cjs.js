@@ -2,12 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var parse = require('css-what');
+var cssWhat = require('css-what');
 var htmlparser2 = require('htmlparser2');
-
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var parse__default = /*#__PURE__*/_interopDefaultLegacy(parse);
 
 // Copyright (c) 2020 Dirk Holtwick. All rights reserved. https://holtwick.de/copyright
 
@@ -102,6 +98,7 @@ function hArgumentParser(tag, attrs, ...children) {
   return {
     tag,
     attrs,
+    // @ts-ignore
     children: children.flat(Infinity),
   }
 }
@@ -276,7 +273,7 @@ let cache = {};
 function parseSelector(selector) {
   let ast = cache[selector];
   if (ast == null) {
-    ast = parse__default['default'](selector);
+    ast = cssWhat.parse(selector);
     cache[selector] = ast;
   }
   return ast

@@ -1769,4 +1769,4 @@ function xml(itag, iattrs) {
 xml.firstLine = '<?xml version="1.0" encoding="utf-8"?>';
 xml.xml = true;
 
-export { CDATA, VDocument, VDocumentFragment, VElement, VHTMLDocument, VNode, VNodeQuery, VTextNode, createDocument, createHTMLDocument, document, escapeHTML, h, html, parseHTML, tidyDOM, unescapeHTML, vdom, xml };
+export { CDATA, VDocument, VDocumentFragment, VElement, VHTMLDocument, VNode, VNodeQuery, VTextNode, createDocument, createHTMLDocument, document, escapeHTML, h, hArgumentParser, hFactory, html, parseHTML, tidyDOM, unescapeHTML, vdom, xml };

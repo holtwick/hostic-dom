@@ -1,8 +1,5 @@
 // @ts-nocheck
-// import resolve from 'rollup-plugin-node-resolve'
-// import commonjs from 'rollup-plugin-commonjs'
-// import json from '@rollup/plugin-json'
-import typescript from 'rollup-plugin-typescript'
+import babel from 'rollup-plugin-babel'
 import pkg from './package.json'
 
 export default [
@@ -34,9 +31,12 @@ export default [
   // `file` and `format` for each target)
   {
     input: 'src/index.js',
-    external: ['ms'],
+    // external: ['ms'],
     plugins: [
-      typescript(), // so Rollup can convert TypeScript to JavaScript
+      // typescript(), // so Rollup can convert TypeScript to JavaScript
+      babel({
+        exclude: ['node_modules/**'],
+      }),
     ],
     output: [
       { file: pkg.main, format: 'cjs' },

@@ -43,7 +43,9 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "test": "jest"
+    "test": "jest",
+    "prepublish": "npm run build",
+    "postinstall": "npm run build"
   },
   "files": [
     "dist"

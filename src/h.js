@@ -91,6 +91,7 @@ export function hArgumentParser(tag, attrs, ...children) {
   return {
     tag,
     attrs,
+    // @ts-ignore
     children: children.flat(Infinity),
   }
 }

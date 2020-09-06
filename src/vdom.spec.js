@@ -96,6 +96,7 @@ describe('VDOM', () => {
       return <h1>Hello, {props.name}</h1>
     }
 
+    // @ts-ignore
     let x = <Welcome name="Sara"/>
     expect(x.render()).toEqual('<h1>Hello, Sara</h1>')
   })

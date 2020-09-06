@@ -496,16 +496,6 @@ function hFactory(context) {
 }
 
 // Copyright (c) 2020 Dirk Holtwick. All rights reserved. https://holtwick.de/copyright
-var rxEscape = /[\-\[\]\/{}()*+?.^$|]/g;
-function escapeRegExp(value) {
-  if (!value) return '';
-
-  if (value instanceof RegExp) {
-    return value.source;
-  }
-
-  return value.replace(rxEscape, '\\$&');
-} // export {
 //   escape as escapeHTML,
 //   unescape as unescapeHTML,
 // } from 'he'
@@ -1709,6 +1699,65 @@ VElement.prototype.setInnerHTML = function (html) {
   this._fixChildNodesParent();
 };
 
+function level(element) {
+  var indent = '';
+
+  while (element.parentNode) {
+    indent += '  ';
+    element = element.parentNode;
+  }
+
+  return indent.substr(2);
+}
+
+function tidyDOM(document, opt) {
+  var selector = 'meta,link,script,p,h1,h2,h3,h4,h5,h6,blockquote,div,ul,ol,li,article,section,footer,head,body,title,nav,section,article,hr,form';
+  document.handle(selector, function (e) {
+    var _prev$nodeValue, _e$parentNode2, _next$nodeValue;
+
+    // Ignore if inside PRE etc.
+    var ee = e;
+
+    while (ee) {
+      if (['PRE', 'CODE', 'SCRIPT', 'STYLE', 'TT'].includes(ee.tagName)) return;
+      ee = ee.parentNode;
+    }
+
+    var prev = e.previousSibling;
+
+    if (!prev || prev.nodeType !== VNode.TEXT_NODE || !((_prev$nodeValue = prev.nodeValue) === null || _prev$nodeValue === void 0 ? void 0 : _prev$nodeValue.endsWith('\n'))) {
+      var _e$parentNode;
+
+      (_e$parentNode = e.parentNode) === null || _e$parentNode === void 0 ? void 0 : _e$parentNode.insertBefore(new VTextNode('\n'), e);
+    }
+
+    (_e$parentNode2 = e.parentNode) === null || _e$parentNode2 === void 0 ? void 0 : _e$parentNode2.insertBefore(new VTextNode(level(e)), e);
+    var next = e.nextSibling;
+
+    if (!next || next.nodeType !== VNode.TEXT_NODE || !((_next$nodeValue = next.nodeValue) === null || _next$nodeValue === void 0 ? void 0 : _next$nodeValue.startsWith('\n'))) {
+      if (next) {
+        var _e$parentNode3;
+
+        (_e$parentNode3 = e.parentNode) === null || _e$parentNode3 === void 0 ? void 0 : _e$parentNode3.insertBefore(new VTextNode('\n'), next);
+      } else {
+        var _e$parentNode4;
+
+        (_e$parentNode4 = e.parentNode) === null || _e$parentNode4 === void 0 ? void 0 : _e$parentNode4.appendChild(new VTextNode('\n'));
+      }
+    }
+
+    if (e.childNodes.length) {
+      var first = e.firstChild;
+
+      if (first.nodeType === VNode.TEXT_NODE) {
+        e.insertBefore(new VTextNode('\n' + level(e) + '  '));
+      }
+
+      e.appendChild(new VTextNode('\n' + level(e)));
+    }
+  });
+}
+
 function xml(itag, iattrs) {
   for (var _len = arguments.length, ichildren = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
     ichildren[_key - 2] = arguments[_key];
@@ -1736,10 +1785,10 @@ exports.createDocument = createDocument;
 exports.createHTMLDocument = createHTMLDocument;
 exports.document = document;
 exports.escapeHTML = escapeHTML;
-exports.escapeRegExp = escapeRegExp;
 exports.h = h;
 exports.html = html;
 exports.parseHTML = parseHTML;
+exports.tidyDOM = tidyDOM;
 exports.unescapeHTML = unescapeHTML;
 exports.vdom = vdom;
 exports.xml = xml;

@@ -5,6 +5,8 @@
 - Parses HTML
 - Supports CSS selectors and queries
 - Can be used with JSX
+- Easy content manipulation (e.g. through `element.handle` helper)
+- Pretty print HTML (`tidyDOM`)
 
 **Does not aim for completeness!**
 
@@ -12,7 +14,65 @@ This is a side project of [hostic](https://github.com/holtwick/hostic), the stat
 
 ## Example
 
+A simple example without JSX:
 
+```js
+import { h, xml } from 'hostic-dom'
+
+let dom = h('ol', {
+  class: 'projects'
+}, [
+  h('li', null, 'hostic ',
+    h('img', {src: 'logo.png'})),
+  h('li', null, 'hostic-dom'),
+])
+
+console.log(dom.render())
+// Output: <ol class="projects"><li>hostic <img src="logo.png"></li><li>hostic-dom</li></ol>
+
+console.log(dom.render(xml))
+// Output: <ol class="projects"><li>hostic <img src="logo.png" /></li><li>hostic-dom</li></ol>
+```
+
+And this one with JSX:
+
+```jsx 
+import { h } from 'hostic-dom'
+
+let dom = <ol className="projects">
+  <li>hostic</li>
+  <li>hostic-dom</li>    
+</ol>
+
+let projects = dom.querySelectorAll('li').map(e => e.textContent).join(', ')
+
+console.log(projects)
+// Output: hostic, hostic-dom
+
+dom.handle('li', e => {
+    if (!e.textContent.endsWith('-dom')) {
+        e.remove()
+    } else {
+        e.innerHTML = '<b>hostic-dom</b> - great DOM helper for static content' 
+    }
+})
+
+console.log(dom.render())
+// Output: <ol class="projects"><li><b>hostic-dom</b> - great DOM helper for static content</li></ol>
+```
+
+In the second example you can see the special manipulation helper `.handle(selector, fn)` in action. You can also see HTML parsing works seamlessly. You can also parse directly:
+
+```js
+import { vdom, tidyDOM } from 'hostic-dom'
+
+let dom = vdom('<div>Hello World</div>')
+tidyDOM(dom)
+console.log(dom.render())
+// Output is pretty printed like: <div>
+//   Hello World
+// </div>
+```
 
 ## JSX
 
@@ -40,6 +100,7 @@ Then add this to `.babelrc`:
 
 ```json
 {
+  // ...
   "plugins": [
     "@babel/plugin-syntax-jsx",
     [
@@ -77,12 +138,3 @@ In options:
 
 Or alternatively as [command line option](https://github.com/evanw/esbuild#command-line-usage): `--jsx-factory=h`
 
-## Tidy
-
-An example for post processing is the `tidy` function that comes with the module. It adds line feeds and spaces to get a pretty printed output of HTML. You can apply ot like this:
-
-```
-import { h } from 'hostic'
-
-
-```

@@ -1,2 +1,9 @@
 # hostic-dom
-Lightweight virtual DOM. Generates HTML and XML. Supports CSS selectors. Supports JSX. Parses HTML.
+
+- Lightweight virtual DOM in pure Javascript
+- Generates HTML and XML
+- Parses HTML
+- Supports CSS selectors and queries
+- Can be used with JSX
+
+**Does not aim for completeness!**

@@ -1,0 +1,54 @@
+{
+  "name": "hostic-dom",
+  "version": "0.2.0",
+  "description": "Lightweight virtual DOM",
+  "author": {
+    "name": "Dirk Holtwick",
+    "email": "dirk.holtwick@gmail.com",
+    "url": "https://holtwick.de"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/holtwick/hostic-dom.git"
+  },
+  "license": "MIT",
+  "funding": {
+    "type": "GitHub Sponsors ❤",
+    "url": "https://github.com/sponsors/holtwick"
+  },
+  "bugs": {
+    "url": "https://github.com/holtwick/hostic-dom/issues"
+  },
+  "homepage": "https://github.com/holtwick/hostic-dom",
+  "dependencies": {
+    "css-what": "^3.3.0",
+    "debug": "^4.1.1",
+    "htmlparser2": "^4.1.0"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "main": "dist/hostic-dom.cjs.js",
+  "module": "dist/hostic-dom.esm.js",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-syntax-jsx": "^7.10.4",
+    "@babel/plugin-transform-react-jsx": "^7.10.4",
+    "@babel/preset-env": "^7.11.5",
+    "jest": "^26.4.2",
+    "rollup": "^2.26.10",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "jest"
+  },
+  "files": [
+    "dist"
+  ]
+}

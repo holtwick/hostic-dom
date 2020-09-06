@@ -36,12 +36,6 @@ export default [
     input: 'src/index.js',
     external: ['ms'],
     plugins: [
-      // resolve({
-      //   // pass custom options to the resolve plugin
-      //   customResolveOptions: {
-      //     moduleDirectory: 'node_modules'
-      //   }
-      // }),
       typescript(), // so Rollup can convert TypeScript to JavaScript
     ],
     output: [

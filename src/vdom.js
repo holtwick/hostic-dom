@@ -14,8 +14,6 @@ let U = { 'textDecorations': 'underline' }
 let S = { 'textDecorations': 'line-through' }
 // let C = {}
 
-const log = require('debug')('hostic:vdom')
-
 let DEFAULTS = {
   'b': B,
   'strong': B,

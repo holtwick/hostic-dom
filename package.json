@@ -1,6 +1,6 @@
 {
   "name": "hostic-dom",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Lightweight virtual DOM",
   "author": {
     "name": "Dirk Holtwick",

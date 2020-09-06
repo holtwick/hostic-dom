@@ -817,8 +817,6 @@ var S = {
   'textDecorations': 'line-through'
 }; // let C = {}
 
-var log = require('debug')('hostic:vdom');
-
 var DEFAULTS = {
   'b': B,
   'strong': B,

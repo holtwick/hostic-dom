@@ -5,7 +5,7 @@ import { html } from './html'
 import { matchSelector } from './vcss.js'
 
 // For node debugging
-const inspect = Symbol.for('nodejs.util.inspect.custom');
+const inspect = Symbol.for('nodejs.util.inspect.custom')
 
 let B = { 'fontWeight': 'bold' }
 let I = { 'fontStyle': 'italic' }
@@ -28,10 +28,6 @@ let DEFAULTS = {
   'strike': S,
   // 'code': C,
   // 'tt': C
-}
-
-function cloneObject(obj) {
-  return JSON.parse(JSON.stringify(obj))
 }
 
 export class VNode {
@@ -64,6 +60,15 @@ export class VNode {
     this._childNodes = []
   }
 
+  cloneNode(deep = false) {
+    let node = new this.constructor()
+    if (deep) {
+      node._childNodes = this._childNodes.map(c => c.cloneNode(true))
+      node._fixChildNodesParent()
+    }
+    return node
+  }
+
   _fixChildNodesParent() {
     this._childNodes.forEach(node => node._parentNode = this)
   }
@@ -92,8 +97,7 @@ export class VNode {
       for (let c of [...node._childNodes]) { // Don't iterate over the original! Do [...el]
         this.appendChild(c)
       }
-    }
-    else if (node instanceof VNode) {
+    } else if (node instanceof VNode) {
       node.remove()
       this._childNodes.push(node)
     } else {
@@ -217,17 +221,13 @@ export class VNode {
     return this?._parentNode?.ownerDocument
   }
 
-  // cloneNode(deep) {
-  //   return _.cloneDeep(this)
-  // }
-
   toString() {
     return `${this.nodeName}`
     // return `${this.nodeName}: ${JSON.stringify(this.nodeValue)}`
   }
 
   [inspect]() {
-    return `${this.constructor.name} "${this.render()}"`;
+    return `${this.constructor.name} "${this.render()}"`
   }
 }
 
@@ -256,6 +256,12 @@ export class VTextNode extends VNode {
 
   render() {
     return this._text
+  }
+
+  cloneNode(deep = false) {
+    let node = super.cloneNode(deep)
+    node._text = this._text
+    return node
   }
 
 }
@@ -321,6 +327,13 @@ export class VElement extends VNodeQuery {
     this._styles = null
   }
 
+  cloneNode(deep = false) {
+    let node = super.cloneNode(deep)
+    node._nodeName = this._nodeName
+    node._attributes = Object.assign({}, this._attributes)
+    return node
+  }
+
   get attributes() {
     return this._attributes
   }
@@ -344,7 +357,7 @@ export class VElement extends VNodeQuery {
 
   get style() {
     if (this._styles == null) {
-      let styles = cloneObject(DEFAULTS[this.tagName.toLowerCase()]) || {}
+      let styles = Object.assign({}, DEFAULTS[this.tagName.toLowerCase()] || {})
       let styleString = this.getAttribute('style')
       if (styleString) {
         let m
@@ -564,7 +577,6 @@ export class VHTMLDocument extends VDocument {
 export function createDocument() {
   return new VDocument()
 }
-
 
 export function createHTMLDocument() {
   return new VHTMLDocument()

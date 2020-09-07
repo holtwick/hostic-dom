@@ -74,6 +74,8 @@ console.log(dom.render())
 // </div>
 ```
 
+These examples are available at [github.com/holtwick/hostic-dom-example](https://github.com/holtwick/hostic-dom-example).
+
 ## JSX
 
 Usually JSX is optimized for React i.e. it expect `React.creatElement` to exist and be the factory for generating the nodes. You can of course get the same effect here if you set up a helper like this:
@@ -138,3 +140,12 @@ In options:
 
 Or alternatively as [command line option](https://github.com/evanw/esbuild#command-line-usage): `--jsx-factory=h`
 
+### Browser DOM
+
+The JSX factory can also be used to directly create HTML DOM nodes in the browser. Just create the `h` function and let it use the browser's `document` object:
+
+```js
+const { hFactory } = require('hostic-dom')
+
+export let h = hFactory({document})
+``` 

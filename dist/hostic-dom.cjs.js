@@ -822,11 +822,6 @@ var DEFAULTS = {
   // 'tt': C
 
 };
-
-function cloneObject(obj) {
-  return JSON.parse(JSON.stringify(obj));
-}
-
 var VNode = /*#__PURE__*/function () {
   _createClass(VNode, [{
     key: "nodeType",
@@ -855,6 +850,22 @@ var VNode = /*#__PURE__*/function () {
   }
 
   _createClass(VNode, [{
+    key: "cloneNode",
+    value: function cloneNode() {
+      var deep = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var node = new this.constructor();
+
+      if (deep) {
+        node._childNodes = this._childNodes.map(function (c) {
+          return c.cloneNode(true);
+        });
+
+        node._fixChildNodesParent();
+      }
+
+      return node;
+    }
+  }, {
     key: "_fixChildNodesParent",
     value: function _fixChildNodesParent() {
       var _this = this;
@@ -1030,9 +1041,6 @@ var VNode = /*#__PURE__*/function () {
     }
   }, {
     key: "toString",
-    // cloneNode(deep) {
-    //   return _.cloneDeep(this)
-    // }
     value: function toString() {
       return "".concat(this.nodeName); // return `${this.nodeName}: ${JSON.stringify(this.nodeValue)}`
     }
@@ -1173,6 +1181,16 @@ var VTextNode = /*#__PURE__*/function (_VNode) {
     value: function render() {
       return this._text;
     }
+  }, {
+    key: "cloneNode",
+    value: function cloneNode() {
+      var deep = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+      var node = _get(_getPrototypeOf(VTextNode.prototype), "cloneNode", this).call(this, deep);
+
+      node._text = this._text;
+      return node;
+    }
   }]);
 
   return VTextNode;
@@ -1293,6 +1311,17 @@ var VElement = /*#__PURE__*/function (_VNodeQuery) {
   }
 
   _createClass(VElement, [{
+    key: "cloneNode",
+    value: function cloneNode() {
+      var deep = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+      var node = _get(_getPrototypeOf(VElement.prototype), "cloneNode", this).call(this, deep);
+
+      node._nodeName = this._nodeName;
+      node._attributes = Object.assign({}, this._attributes);
+      return node;
+    }
+  }, {
     key: "setAttribute",
     value: function setAttribute(name, value) {
       this._attributes[name] = value;
@@ -1347,7 +1376,7 @@ var VElement = /*#__PURE__*/function (_VNodeQuery) {
     key: "style",
     get: function get() {
       if (this._styles == null) {
-        var styles = cloneObject(DEFAULTS[this.tagName.toLowerCase()]) || {};
+        var styles = Object.assign({}, DEFAULTS[this.tagName.toLowerCase()] || {});
         var styleString = this.getAttribute('style');
 
         if (styleString) {

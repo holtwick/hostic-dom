@@ -171,6 +171,11 @@ describe('VDOM', () => {
     el.insertBefore(<div>Subtitle</div>, el.querySelector('p'))
 
     expect(el.render()).toEqual('<div><h1>Welcome</h1><div>Subtitle</div><p>Hallo</p></div>')
+
+    // Clone
+
+    expect(el.cloneNode().render()).toEqual('<div></div>')
+    expect(el.cloneNode(true).render()).toEqual('<div><h1>Welcome</h1><div>Subtitle</div><p>Hallo</p></div>')
   })
 
 

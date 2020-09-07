@@ -74,6 +74,8 @@ console.log(dom.render())
 // </div>
 ```
 
+These examples are available at [github.com/holtwick/hostic-dom-example](https://github.com/holtwick/hostic-dom-example).
+
 ## JSX
 
 Usually JSX is optimized for React i.e. it expect `React.creatElement` to exist and be the factory for generating the nodes. You can of course get the same effect here if you set up a helper like this:

@@ -140,3 +140,12 @@ In options:
 
 Or alternatively as [command line option](https://github.com/evanw/esbuild#command-line-usage): `--jsx-factory=h`
 
+### Browser DOM
+
+The JSX factory can also be used to directly create HTML DOM nodes in the browser. Just create the `h` function and let it use the browser's `document` object:
+
+```js
+const { hFactory } = require('hostic-dom')
+
+export let h = hFactory({document})
+``` 

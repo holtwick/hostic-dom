@@ -565,7 +565,6 @@ export function createDocument() {
   return new VDocument()
 }
 
-
 export function createHTMLDocument() {
   return new VHTMLDocument()
 }

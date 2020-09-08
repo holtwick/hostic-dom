@@ -56,5 +56,15 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "./jest-transformer.js"
+    },
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "node_modules/",
+      "dist/"
+    ]
+  }
 }

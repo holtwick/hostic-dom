@@ -1,21 +1,7 @@
 const fs = require('fs')
 const esbuild = require('esbuild')
 const pkg = require('./package.json')
-
-const common = {
-  bundle: true,
-  sitemap: true,
-  minify: true,
-  target: 'es2017',
-  loader: {
-    '.js': 'jsx',
-  },
-  jsxFactory: 'h',
-  external: [
-    'htmlparser2',
-    'css-what',
-  ],
-}
+const common = require('./build.config.js')
 
 const external = [
   ...Object.keys(pkg.dependencies ?? {}),

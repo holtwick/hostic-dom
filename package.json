@@ -31,28 +31,16 @@
   "module": "dist/hostic-dom.esm.js",
   "sideEffects": false,
   "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/plugin-syntax-jsx": "^7.10.4",
-    "@babel/plugin-transform-react-jsx": "^7.10.4",
-    "@babel/preset-env": "^7.11.5",
     "debug": "^4.1.1",
     "esbuild": "^0.6.32",
     "estrella": "^1.1.0",
-    "jest": "^26.4.2",
-    "rollup": "^2.26.11",
-    "rollup-plugin-babel": "^4.4.0"
+    "jest": "^26.4.2"
   },
   "scripts": {
-    "build:cjs": "esbuild --bundle --sourcemap --target=es2017 --format=cjs --minify --jsx-factory=h --loader:.js=jsx src/index.js --external:htmlparser2 --external:css-what --outfile=dist/hostic-dom.cjs.js",
-    "build:esm": "esbuild --bundle --sourcemap --target=es2017 --format=esm --minify --jsx-factory=h --loader:.js=jsx src/index.js --external:htmlparser2 --external:css-what --outfile=dist/hostic-dom.esm.js",
     "build": "node build.js",
     "watch": "node build.js -w",
-    "build2": "npm run build:cjs && npm run build:esm",
-    "build1": "rollup -c",
-    "dev": "rollup -c -w",
     "test": "jest",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build && npm test"
   },
   "files": [
     "dist"

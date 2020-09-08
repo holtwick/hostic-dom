@@ -31,18 +31,14 @@ module.exports = {
   },
 
   process(content, filename) {
-    let file = `.hostic/${Math.random()}.js`
-
-    esbuild.buildSync({
+    let result = esbuild.buildSync({
       ...common,
-      outfile: file,
+      write: false,
       entryPoints: [filename],
       external,
     })
 
-    let js = fs.readFileSync(file, 'utf-8')
-    fs.unlinkSync(file)
-
-    return js
+    let contents = result.outputFiles[0].contents
+    return new TextDecoder('utf-8').decode(contents)
   },
 }

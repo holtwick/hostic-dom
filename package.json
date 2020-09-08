@@ -47,7 +47,7 @@
   ],
   "jest": {
     "transform": {
-      "^.+\\.jsx?$": "./jest-transformer.js"
+      "^.+\\.jsx?$": "./build.jest.js"
     },
     "testEnvironment": "node",
     "testPathIgnorePatterns": [

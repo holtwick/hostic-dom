@@ -1,6 +1,6 @@
 {
   "name": "hostic-dom",
-  "version": "0.5.0",
+  "version": "0.5.3",
   "description": "Lightweight virtual DOM",
   "author": {
     "name": "Dirk Holtwick",
@@ -29,6 +29,7 @@
   },
   "main": "dist/hostic-dom.cjs.js",
   "module": "dist/hostic-dom.esm.js",
+  "unpkg": "dist/hostic-dom.min.js",
   "sideEffects": false,
   "devDependencies": {
     "debug": "^4.1.1",

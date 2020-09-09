@@ -1,3 +1,5 @@
+const pkg = require('./package.json')
+
 module.exports = {
   bundle: true,
   sitemap: true,
@@ -8,7 +10,8 @@ module.exports = {
   },
   jsxFactory: 'h',
   external: [
-    'htmlparser2',
-    'css-what',
+    ...Object.keys(pkg.dependencies ?? {}),
+    ...Object.keys(pkg.devDependencies ?? {}),
+    ...Object.keys(pkg.peerDependencies ?? {}),
   ],
 }

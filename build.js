@@ -18,3 +18,11 @@ build({
   outfile: pkg.module,
   format: 'esm',
 })
+
+build({
+  ...common,
+  entry: 'src/index.js',
+  outfile: pkg.unpkg,
+  globalName: 'hosticDOM',
+  format: 'iife',
+})

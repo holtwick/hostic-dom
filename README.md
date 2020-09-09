@@ -149,3 +149,15 @@ const { hFactory } = require('hostic-dom')
 
 export let h = hFactory({document})
 ``` 
+
+### Unpkg
+
+`hostic-dom` is also available via **unpkg** via <https://unpkg.com/hostic-dom>. The global name provided here is `hosticDOM` i.e. you can easily use it like this:
+
+```html
+<script crossorigin src="https://unpkg.com/hostic-dom"></script>
+<script>
+const { h } = hosticDOM
+// Your code here
+</script>
+```

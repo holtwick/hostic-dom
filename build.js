@@ -19,10 +19,13 @@ build({
   format: 'esm',
 })
 
+// Browser, Unpkg
+
 build({
   ...common,
-  entry: 'src/index.js',
+  entry: 'src/index-web.js',
   outfile: pkg.unpkg,
   globalName: 'hosticDOM',
   format: 'iife',
+  external: [],
 })

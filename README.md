@@ -161,3 +161,5 @@ const { h } = hosticDOM
 // Your code here
 </script>
 ```
+
+> Please note: HTML parsing and setting innerHTML are not available here. 

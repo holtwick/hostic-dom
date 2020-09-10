@@ -4,6 +4,7 @@
 import { VDocument, VDocumentFragment, h } from './vdom'
 import { xml } from './xml.js'
 import { parseHTML } from './vdomparser.js'
+import { vdom } from './vdomparser.js'
 import { createHTMLDocument } from './vdom.js'
 
 describe('VDOM', () => {
@@ -84,8 +85,8 @@ describe('VDOM', () => {
     let title = 'World'
 
     let doc = <body>
-    <h1>{title}</h1>
-    {content}
+      <h1>{title}</h1>
+      {content}
     </body>
 
     expect(doc.render()).toBe('<body><h1>World</h1><div>Hello</div></body>')
@@ -177,6 +178,5 @@ describe('VDOM', () => {
     expect(el.cloneNode().render()).toEqual('<div></div>')
     expect(el.cloneNode(true).render()).toEqual('<div><h1>Welcome</h1><div>Subtitle</div><p>Hallo</p></div>')
   })
-
 
 })

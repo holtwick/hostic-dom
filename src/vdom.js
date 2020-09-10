@@ -97,13 +97,18 @@ export class VNode {
       for (let c of [...node._childNodes]) { // Don't iterate over the original! Do [...el]
         this.appendChild(c)
       }
+    } else if (Array.isArray(node)) {
+      for (let c of [...node]) { // Don't iterate over the original! Do [...el]
+        this.appendChild(c)
+      }
     } else if (node instanceof VNode) {
       node.remove()
       this._childNodes.push(node)
     } else {
       // Fallback for unknown data
       try {
-        this._childNodes.push(new VTextNode(JSON.stringify(node, null, 2)))
+        const text = typeof node === 'string' ? node : JSON.stringify(node, null, 2)
+        this._childNodes.push(new VTextNode(text))
       } catch (err) {
         console.error(`The data ${node} to be added to ${this.render()} is problematic: ${err}`)
       }
@@ -155,6 +160,10 @@ export class VNode {
   }
 
   get childNodes() {
+    return this._childNodes || []
+  }
+
+  get children() {
     return this._childNodes || []
   }
 

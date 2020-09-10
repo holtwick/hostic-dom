@@ -16,7 +16,7 @@ export function vdom(obj = null) {
     return parseHTML(obj)
   }
   // console.warn('Cannot convert to VDOM:', obj)
-  return new VElement('div')
+  return new VDocumentFragment()
 }
 
 export function parseHTML(html) {

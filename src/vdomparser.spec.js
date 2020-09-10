@@ -13,7 +13,7 @@ describe('VDOM Parser', () => {
   // })
 
   it('should respect nested', () => {
-    const html = '<div><h1>Test</h1><p>Lorem <br> <a href="#" style="font-wAIGHT: bold;;">ipsum</a></p></div>'
+    const html = '<div><h1>Test</h1><p>&quot;Lorem <br> <a href="#" style="font-wAIGHT: &amp;bold;;">ipsum</a></p></div>'
     let frag = parseHTML(html)
     let rhtml = frag.render()
     // expect(rhtml).toBe('Xyz <script type="text/javascript">var foo = \'<<bar>>\';</script>')

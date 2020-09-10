@@ -23,9 +23,8 @@ build({
 
 build({
   ...common,
-  entry: 'src/index-web.js',
+  entry: 'src/index.js',
   outfile: pkg.unpkg,
   globalName: 'hosticDOM',
   format: 'iife',
-  external: [],
 })

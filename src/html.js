@@ -10,6 +10,24 @@
 import { hArgumentParser } from './h.js'
 import { escapeHTML } from './encoding'
 
+export const SELF_CLOSING_TAGS = [
+  'area',
+  'base',
+  'br',
+  'col',
+  'embed',
+  'hr',
+  'img',
+  'input',
+  'keygen',
+  'link',
+  'meta',
+  'param',
+  'source',
+  'track',
+  'wbr',
+  'command',
+]
 let USED_JSX = [] // HACK:dholtwick:2016-08-23
 
 export function CDATA(s) {
@@ -80,7 +98,7 @@ export function markup(xmlMode, tag, attrs, children) {
     }
 
     if (!xmlMode) {
-      if (['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr'].indexOf(tag) !== -1) {
+      if (SELF_CLOSING_TAGS.includes(tag)) {
         USED_JSX.push(s)
         return s
       }

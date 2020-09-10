@@ -2,7 +2,10 @@
 
 import { VDocumentFragment, VElement, VTextNode, document } from './vdom'
 import { VNode } from './vdom'
-import { Parser } from 'htmlparser2'
+import { SELF_CLOSING_TAGS } from './html.js'
+
+const HtmlParser = require('html-parser-lite')
+const RawHtmlParser = HtmlParser.RawHtmlParser
 
 // Makes sure we operate on VNodes
 export function vdom(obj = null) {
@@ -23,37 +26,73 @@ export function parseHTML(html) {
   let frag = new VDocumentFragment()
 
   let stack = [frag]
-  let currentElement = frag
 
-  let parser = new Parser({
-    onopentag: (name, attrs) => {
-      let element = document.createElement(name, attrs)
-      stack.push(element)
-      currentElement.appendChild(element)
-      currentElement = element
+  let parser = new RawHtmlParser({
+    // the for methods must be implemented yourself
+    scanner: {
+      startElement(tagName, attrs, isSelfClosing) {
+        let parentNode = stack[stack.length - 1]
+        const element = document.createElement(tagName, attrs)
+        parentNode.appendChild(element)
+        if (!(SELF_CLOSING_TAGS.includes(tagName.toLowerCase()) || isSelfClosing)) {
+          stack.push(element)
+        }
+      },
+      endElement(tagName) {
+        stack.pop()
+      },
+      characters(text) {
+        let parentNode = stack[stack.length - 1]
+        if (parentNode?.lastChild?.nodeType === VNode.TEXT_NODE) {
+          parentNode.lastChild._text += text
+        } else {
+          parentNode.appendChild(new VTextNode(text))
+        }
+      },
+      comment(text) {
+      },
     },
-    ontext: function (text) {
-      if (currentElement?.lastChild?.nodeType === VNode.TEXT_NODE) {
-        currentElement.lastChild._text += text
-      } else {
-        currentElement.appendChild(new VTextNode(text))
-      }
-    },
-    onclosetag: function (name) {
-      let element = stack.pop()
-      currentElement = stack[stack.length - 1]
-      // if (element.nodeName !== currentElement.nodeName) {
-      //   console.log('error', element, currentElement)
-      // }
-    },
-  }, { decodeEntities: true })
-  parser.write(html)
-  parser.end()
-
+  })
+  parser.parse(html)
   // console.log('frag', frag.innerHTML)
-
   return frag
 }
+
+// export function parseHTML2(html) {
+//   let frag = new VDocumentFragment()
+//
+//   let stack = [frag]
+//   let currentElement = frag
+//
+//   let parser = new Parser({
+//     onopentag: (name, attrs) => {
+//       let element = document.createElement(name, attrs)
+//       stack.push(element)
+//       currentElement.appendChild(element)
+//       currentElement = element
+//     },
+//     ontext: function (text) {
+//       if (currentElement?.lastChild?.nodeType === VNode.TEXT_NODE) {
+//         currentElement.lastChild._text += text
+//       } else {
+//         currentElement.appendChild(new VTextNode(text))
+//       }
+//     },
+//     onclosetag: function (name) {
+//       let element = stack.pop()
+//       currentElement = stack[stack.length - 1]
+//       // if (element.nodeName !== currentElement.nodeName) {
+//       //   console.log('error', element, currentElement)
+//       // }
+//     },
+//   }, { decodeEntities: true })
+//   parser.write(html)
+//   parser.end()
+//
+//   // console.log('frag', frag.innerHTML)
+//
+//   return frag
+// }
 
 VElement.prototype.setInnerHTML = function (html) {
   let frag = parseHTML(html)

@@ -16,6 +16,7 @@ build({
   ...common,
   entry: 'src/index.js',
   outfile: pkg.module,
+  target: 'esnext',
   format: 'esm',
 })
 
@@ -23,9 +24,8 @@ build({
 
 build({
   ...common,
-  entry: 'src/index-web.js',
+  entry: 'src/index.js',
   outfile: pkg.unpkg,
   globalName: 'hosticDOM',
   format: 'iife',
-  external: [],
 })

@@ -1,5 +1,7 @@
 import { parse } from 'css-what'
 
+// Alternative could be https://github.com/leaverou/parsel
+
 let cache = {}
 
 export function parseSelector(selector) {

@@ -1,6 +1,6 @@
 {
   "name": "hostic-dom",
-  "version": "0.6.0",
+  "version": "0.7.1",
   "description": "Lightweight virtual DOM",
   "author": {
     "name": "Dirk Holtwick",
@@ -22,7 +22,7 @@
   "homepage": "https://github.com/holtwick/hostic-dom",
   "dependencies": {
     "css-what": "^3.3.0",
-    "htmlparser2": "^4.1.0"
+    "html-parser-lite": "^0.2.1"
   },
   "engines": {
     "node": ">=12"

@@ -13,7 +13,7 @@ describe('HTML', () => {
       },
       h('hr'),
       h('b', {}, 'Welcome'))
-    expect(s).toEqual('<a href="example.com" x="x"><hr /><b>Welcome</b></a>')
+    expect(s).toEqual('<a href="example.com" x><hr /><b>Welcome</b></a>')
   })
 
   it('should use JSX', () => {
@@ -24,7 +24,7 @@ describe('HTML', () => {
     let s = <a href="example.com" x {...spread}>
       <hr/>
       <b>Welcome</b></a>
-    expect(s).toEqual('<a href="example.com" x="x" title="Hello" id="greeting"><hr /><b>Welcome</b></a>')
+    expect(s).toEqual('<a href="example.com" x title="Hello" id="greeting"><hr /><b>Welcome</b></a>')
   })
 
 })

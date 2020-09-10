@@ -70,7 +70,8 @@ export function markup(xmlMode, tag, attrs, children) {
         }
         name = name.replace(/__/g, ':')
         if (v === true) {
-          s += ` ${name}="${name}"`
+          // s += ` ${name}="${name}"`
+          s += ` ${name}`
         } else if (name === 'style' && typeof v === 'object') {
           s += ` ${name}="${
             Object.keys(v).filter(

@@ -34,7 +34,10 @@ export function parseHTML(html) {
       startElement(tagName, attrs, isSelfClosing) {
         for (let name in attrs) {
           if (attrs.hasOwnProperty(name)) {
-            attrs[name] = unescapeHTML(attrs[name])
+            let value = attrs[name]
+            if (typeof value === 'string') {
+              attrs[name] = unescapeHTML(value)
+            }
           }
         }
         let parentNode = stack[stack.length - 1]

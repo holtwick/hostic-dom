@@ -3,6 +3,7 @@
 import { VDocumentFragment, VElement, VTextNode, document } from './vdom'
 import { VNode } from './vdom'
 import { SELF_CLOSING_TAGS } from './html.js'
+import { unescapeHTML } from './encoding.js'
 
 const HtmlParser = require('html-parser-lite')
 const RawHtmlParser = HtmlParser.RawHtmlParser
@@ -31,6 +32,11 @@ export function parseHTML(html) {
     // the for methods must be implemented yourself
     scanner: {
       startElement(tagName, attrs, isSelfClosing) {
+        for (let name in attrs) {
+          if (attrs.hasOwnProperty(name)) {
+            attrs[name] = unescapeHTML(attrs[name])
+          }
+        }
         let parentNode = stack[stack.length - 1]
         const element = document.createElement(tagName, attrs)
         parentNode.appendChild(element)
@@ -42,6 +48,7 @@ export function parseHTML(html) {
         stack.pop()
       },
       characters(text) {
+        text = unescapeHTML(text)
         let parentNode = stack[stack.length - 1]
         if (parentNode?.lastChild?.nodeType === VNode.TEXT_NODE) {
           parentNode.lastChild._text += text

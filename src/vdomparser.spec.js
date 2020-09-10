@@ -17,6 +17,7 @@ describe('VDOM Parser', () => {
     <div class="embed-video-container embed-responsive embed-responsive-16by9">
         <iframe src="https://www.youtube.com/embed/TJTsAQguaVE" frameborder="0" allowfullscreen class="embed-responsive-item"></iframe>
     </div>
+    <p class="img-wrapper"><img src="/assets/ocr@2x-97ede361.png" alt="" width="621" height="422"></p>
     `
     let frag = parseHTML(html)
     let rhtml = frag.render()

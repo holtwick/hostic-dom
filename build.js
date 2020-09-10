@@ -16,6 +16,7 @@ build({
   ...common,
   entry: 'src/index.js',
   outfile: pkg.module,
+  target: 'esnext',
   format: 'esm',
 })
 

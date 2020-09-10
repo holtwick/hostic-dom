@@ -4,9 +4,7 @@ import { VDocumentFragment, VElement, VTextNode, document } from './vdom'
 import { VNode } from './vdom'
 import { SELF_CLOSING_TAGS } from './html.js'
 import { unescapeHTML } from './encoding.js'
-
-const HtmlParser = require('html-parser-lite')
-const RawHtmlParser = HtmlParser.RawHtmlParser
+import { HtmlParser } from './htmlparser.js'
 
 // Makes sure we operate on VNodes
 export function vdom(obj = null) {
@@ -28,13 +26,14 @@ export function parseHTML(html) {
 
   let stack = [frag]
 
-  let parser = new RawHtmlParser({
+  let parser = new HtmlParser({
     // the for methods must be implemented yourself
     scanner: {
       startElement(tagName, attrs, isSelfClosing) {
         for (let name in attrs) {
           if (attrs.hasOwnProperty(name)) {
             let value = attrs[name]
+            // console.log(name, value)
             if (typeof value === 'string') {
               attrs[name] = unescapeHTML(value)
             }

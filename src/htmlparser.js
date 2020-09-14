@@ -1,3 +1,6 @@
+// Taken from https://github.com/creeperyang/html-parser-lite
+// and slightly modified. Original also under MIT license. Thanks.
+
 // attribute, like href="javascript:void(0)"
 // 1. start with name (not empty and not =)
 // 2. and then \s*=\s*

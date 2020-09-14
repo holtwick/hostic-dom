@@ -5,6 +5,8 @@ import { VNode } from './vdom'
 import { SELF_CLOSING_TAGS } from './html.js'
 import { unescapeHTML } from './encoding.js'
 import { HtmlParser } from './htmlparser.js'
+import { VDocument } from './vdom.js'
+import { VDocType } from './vdom'
 
 // Makes sure we operate on VNodes
 export function vdom(obj = null) {
@@ -22,7 +24,7 @@ export function vdom(obj = null) {
 }
 
 export function parseHTML(html) {
-  let frag = new VDocumentFragment()
+  let frag = html.startsWith('<!') ? new VDocument() : new VDocumentFragment() // !hack
 
   let stack = [frag]
 
@@ -30,6 +32,13 @@ export function parseHTML(html) {
     // the for methods must be implemented yourself
     scanner: {
       startElement(tagName, attrs, isSelfClosing) {
+        const lowerTagName = tagName.toLowerCase()
+
+        if (lowerTagName === '!doctype') {
+          frag.docType = new VDocType()
+          return
+        }
+
         for (let name in attrs) {
           if (attrs.hasOwnProperty(name)) {
             let value = attrs[name]

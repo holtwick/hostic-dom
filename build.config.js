@@ -2,7 +2,7 @@
 
 module.exports = {
   bundle: true,
-  sitemap: true,
+  // sitemap: true,
   minify: true,
   target: 'es2015',
   loader: {

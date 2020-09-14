@@ -11,6 +11,7 @@ module.exports = {
   process(content, filename) {
     let result = esbuild.buildSync({
       ...common,
+      // sitemap: 'inline',
       write: false,
       entryPoints: [filename],
     })

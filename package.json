@@ -1,6 +1,6 @@
 {
   "name": "hostic-dom",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Lightweight virtual DOM",
   "author": {
     "name": "Dirk Holtwick",
@@ -33,14 +33,14 @@
   "sideEffects": false,
   "devDependencies": {
     "debug": "^4.1.1",
-    "esbuild": "^0.6.32",
+    "esbuild": "^0.7.1",
     "estrella": "^1.1.0",
     "jest": "^26.4.2"
   },
   "scripts": {
     "build": "node build.js",
     "watch": "node build.js -w",
-    "test": "jest",
+    "test": "jest --no-cache",
     "prepublish": "npm run build && npm test"
   },
   "files": [

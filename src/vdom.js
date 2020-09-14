@@ -487,6 +487,31 @@ export class VElement extends VNodeQuery {
 
 }
 
+
+export class VDocType extends VNode { //todo
+
+  name
+  publicId
+  systemId
+
+  get nodeName() {
+    return super.nodeName
+  }
+
+  get nodeValue() {
+    return super.nodeValue
+  }
+
+  get nodeType() {
+    return VDocType.DOCUMENT_TYPE_NODE
+  }
+
+  render() {
+    return `<!DOCTYPE html>` // hack!
+  }
+
+}
+
 export class VDocumentFragment extends VNodeQuery {
 
   get nodeType() {
@@ -521,6 +546,8 @@ export class VDocumentFragment extends VNodeQuery {
 
 export class VDocument extends VDocumentFragment {
 
+  docType
+
   get nodeType() {
     return VNode.DOCUMENT_NODE
   }
@@ -533,17 +560,19 @@ export class VDocument extends VDocumentFragment {
     return this.firstChild
   }
 
-  // render(h = html) {
-  //   let content =  super.render(h)
-  //   if (h.firstLine) {
-  //     content = h.firstLine + '\n' + content
-  //   }
-  //   return content
-  // }
+  render(h = html) {
+    let content =  super.render(h)
+    if (this.docType) {
+      content = this.docType.render() + content
+    }
+    return content
+  }
 
 }
 
 export class VHTMLDocument extends VDocument {
+
+  // doctype
 
   constructor() {
     super()
@@ -575,7 +604,7 @@ export class VHTMLDocument extends VDocument {
 
   render(h = html) {
     let content = super.render(h)
-    if (h.firstLine) {
+    if (h.firstLine) { // !hack, should be doctype
       content = h.firstLine + '\n' + content
     }
     return content

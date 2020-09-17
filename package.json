@@ -1,6 +1,6 @@
 {
   "name": "hostic-dom",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "Lightweight virtual DOM",
   "author": {
     "name": "Dirk Holtwick",
@@ -34,7 +34,7 @@
   "devDependencies": {
     "debug": "^4.1.1",
     "esbuild": "^0.7.1",
-    "estrella": "^1.1.0",
+    "estrella": "^1.1.1",
     "jest": "^26.4.2"
   },
   "scripts": {

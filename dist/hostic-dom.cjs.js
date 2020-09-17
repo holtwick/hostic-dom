@@ -10,3 +10,4 @@ var Q=Object.defineProperty,ue=Object.prototype.hasOwnProperty,G=Object.assign,u
 `+Cu(t)+"  ")),t.appendChild(new m(`
 `+Cu(t)))}})}function nu(u,e,...r){let{tag:t,attrs:s,children:a}=_(u,e,r);return gu(!0,t,s,a)}nu.firstLine='<?xml version="1.0" encoding="utf-8"?>';nu.xml=!0;ee(exports,{CDATA:()=>Hu,VDocType:()=>tu,VDocument:()=>P,VDocumentFragment:()=>V,VElement:()=>S,VHTMLDocument:()=>Yu,VNode:()=>D,VNodeQuery:()=>bu,VTextNode:()=>m,createDocument:()=>Zu,createHTMLDocument:()=>Ee,document:()=>au,escapeHTML:()=>F.escape,h:()=>xe,hArgumentParser:()=>_,hFactory:()=>fu,html:()=>v,parseHTML:()=>ou,removeBodyContainer:()=>we,tidyDOM:()=>Wu,unescapeHTML:()=>F.unescape,vdom:()=>iu,xml:()=>nu});
 /*! https://mths.be/he v1.2.0 by @mathias | MIT license */
+//# sourceMappingURL=hostic-dom.cjs.js.map

@@ -10,3 +10,4 @@ var pu=Object.defineProperty,Qu=Object.prototype.hasOwnProperty,G=Object.assign,
 `+Cu(t)+"  ")),t.appendChild(new m(`
 `+Cu(t)))}})}function iu(u,e,...r){let{tag:t,attrs:s,children:a}=_(u,e,r);return gu(!0,t,s,a)}iu.firstLine='<?xml version="1.0" encoding="utf-8"?>';iu.xml=!0;const we=F.escape;const qe=F.unescape;export{Iu as CDATA,ru as VDocType,P as VDocument,V as VDocumentFragment,S as VElement,Ju as VHTMLDocument,D as VNode,bu as VNodeQuery,m as VTextNode,Yu as createDocument,Ce as createHTMLDocument,tu as document,we as escapeHTML,Ee as h,_ as hArgumentParser,fu as hFactory,v as html,su as parseHTML,ye as removeBodyContainer,Zu as tidyDOM,qe as unescapeHTML,ou as vdom,iu as xml};
 /*! https://mths.be/he v1.2.0 by @mathias | MIT license */
+//# sourceMappingURL=hostic-dom.esm.js.map

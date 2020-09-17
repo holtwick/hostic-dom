@@ -101,8 +101,7 @@ npm i -D @babel/plugin-syntax-jsx @babel/plugin-transform-react-jsx
 Then add this to `.babelrc`:
 
 ```json
-{
-  // ...
+{    
   "plugins": [
     "@babel/plugin-syntax-jsx",
     [
@@ -162,4 +161,9 @@ const { h } = hosticDOM
 </script>
 ```
 
-> Please note: HTML parsing and setting innerHTML are not available here. 
+## Misc
+
+- To set namespace colons in JSX use double underscore i.e. `<xhtml__link />` becomes `<xhtml:link />`
+- To allow `CDATA` use the helper function e.g. `<div>{ CDATA(yourRawData) }</div>`
+- `style` attributes can handle objects e.g. `<span style={{backgroundColor: 'red'}} />` becomes `<span style="background-color: red" />`
+ 

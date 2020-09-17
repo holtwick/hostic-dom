@@ -5,7 +5,7 @@ const common = require('./build.config.js')
 
 const { build } = require('estrella')
 
-common.sitemap = true
+common.sourcemap = true
 
 build({
   ...common,

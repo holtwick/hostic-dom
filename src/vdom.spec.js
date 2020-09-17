@@ -18,7 +18,7 @@ describe('VDOM', () => {
   })
 
   it('should mimic DOM', () => {
-    let document = new VDocument()
+    let document = new VDocument()    
     let frag = new VDocumentFragment()
     let p = document.createElement('p')
     p.setAttribute('class', 'foo')

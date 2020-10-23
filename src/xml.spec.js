@@ -22,9 +22,9 @@ describe('HTML', () => {
       id: 'greeting',
     }
     let s = <a href="example.com" x {...spread}>
-      <hr/>
+      <hr myCaseSensitiveAttribute="1" />
       <b>Welcome</b></a>
-    expect(s).toEqual('<a href="example.com" x title="Hello" id="greeting"><hr /><b>Welcome</b></a>')
+    expect(s).toEqual('<a href="example.com" x title="Hello" id="greeting"><hr myCaseSensitiveAttribute="1" /><b>Welcome</b></a>')
   })
 
 })

@@ -4,7 +4,6 @@
 import { VDocument, VDocumentFragment, h } from './vdom'
 import { xml } from './xml.js'
 import { parseHTML } from './vdomparser.js'
-import { vdom } from './vdomparser.js'
 import { createHTMLDocument } from './vdom.js'
 
 describe('VDOM', () => {
@@ -18,7 +17,7 @@ describe('VDOM', () => {
   })
 
   it('should mimic DOM', () => {
-    let document = new VDocument()    
+    let document = new VDocument()
     let frag = new VDocumentFragment()
     let p = document.createElement('p')
     p.setAttribute('class', 'foo')
@@ -76,8 +75,8 @@ describe('VDOM', () => {
       <hr/>
       {null && 'This is invisible'}
       <b>Welcome</b></a>
-    expect(s.render()).toEqual('<a href="example.com" x="x" onclick="return false" title="Hello" id="greeting"><hr><b>Welcome</b></a>')
-    expect(s.render(xml)).toEqual('<a href="example.com" x="x" onclick="return false" title="Hello" id="greeting"><hr /><b>Welcome</b></a>')
+    expect(s.render()).toEqual('<a href="example.com" x="x" onClick="return false" title="Hello" id="greeting"><hr><b>Welcome</b></a>')
+    expect(s.render(xml)).toEqual('<a href="example.com" x="x" onClick="return false" title="Hello" id="greeting"><hr /><b>Welcome</b></a>')
   })
 
   it('should nested JSX', () => {

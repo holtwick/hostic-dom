@@ -23,7 +23,7 @@ describe('Tidy', () => {
       <pre><p>Do nothing</p></pre>
     </fragment>)
 
-    expect(document.render()).toEqual('<!DOCTYPE html>\n<html><head><title></title><link rel="alternate" hreflang="de" href="https://holtwick.de/de/"><meta name="twitter:site" content="@holtwick"></head><body><h1>Hello</h1><p>This is a <b>sample</b>. And a link <a href="example">example</a>.</p><p>Some lines <br> line <br> line </p><ol><li>One</li><li>Two</li></ol><pre><p>Do nothing</p></pre></body></html>')
+    expect(document.render()).toEqual('<!DOCTYPE html>\n<html><head><title></title><link rel="alternate" hrefLang="de" href="https://holtwick.de/de/"><meta name="twitter:site" content="@holtwick"></head><body><h1>Hello</h1><p>This is a <b>sample</b>. And a link <a href="example">example</a>.</p><p>Some lines <br> line <br> line </p><ol><li>One</li><li>Two</li></ol><pre><p>Do nothing</p></pre></body></html>')
 
     tidyDOM(document)
 
@@ -31,7 +31,7 @@ describe('Tidy', () => {
 <html>
   <head>
     <title></title>
-    <link rel="alternate" hreflang="de" href="https://holtwick.de/de/">
+    <link rel="alternate" hrefLang="de" href="https://holtwick.de/de/">
     <meta name="twitter:site" content="@holtwick">
   </head>
   <body>

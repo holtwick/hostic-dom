@@ -321,6 +321,8 @@ export class VNodeQuery extends VNode {
 
 export class VElement extends VNodeQuery {
 
+  _originalTagName
+
   get nodeType() {
     return VNode.ELEMENT_NODE
   }
@@ -331,6 +333,7 @@ export class VElement extends VNodeQuery {
 
   constructor(name = 'div', attrs = {}) {
     super()
+    this._originalTagName = name
     this._nodeName = (name || '').toUpperCase()
     this._attributes = attrs || {}
     this._styles = null
@@ -338,6 +341,7 @@ export class VElement extends VNodeQuery {
 
   cloneNode(deep = false) {
     let node = super.cloneNode(deep)
+    node._originalTagName = this._originalTagName
     node._nodeName = this._nodeName
     node._attributes = Object.assign({}, this._attributes)
     return node
@@ -347,21 +351,32 @@ export class VElement extends VNodeQuery {
     return this._attributes
   }
 
+  _findAttributeName(name) {
+    const search = name.toLowerCase()
+    return  Object.keys(this._attributes).find(name => search === name.toLowerCase())
+  }
+
   setAttribute(name, value) {
+    this.removeAttribute(name)
     this._attributes[name] = value
     this._styles = null
   }
 
   getAttribute(name) {
-    return this._attributes[name]
+    const originalName = this._findAttributeName(name)
+    return this._attributes[originalName]
   }
 
   removeAttribute(name) {
-    delete this._attributes[name]
+    const originalName = this._findAttributeName(name)
+    if (originalName) {
+      delete this._attributes[name]
+    }
   }
 
   hasAttribute(name) {
-    return this._attributes[name] != null
+    const originalName = this._findAttributeName(name)
+    return this._attributes[originalName] != null
   }
 
   get style() {
@@ -479,14 +494,13 @@ export class VElement extends VNodeQuery {
 
   render(h = html) {
     return h(
-      this.tagName.toLowerCase(),
+      this._originalTagName || this.tagName,
       this.attributes,
       this.childNodes.map(c => c.render(h)),
     )
   }
 
 }
-
 
 export class VDocType extends VNode { //todo
 
@@ -561,7 +575,7 @@ export class VDocument extends VDocumentFragment {
   }
 
   render(h = html) {
-    let content =  super.render(h)
+    let content = super.render(h)
     if (this.docType) {
       content = this.docType.render() + content
     }

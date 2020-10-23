@@ -28,12 +28,11 @@ function _h(context, tag, attrs, children) {
     }
     if (attrs) {
       for (let [key, value] of Object.entries(attrs)) {
-        if (key && typeof key === 'string') {
-          key = key.toLowerCase()
-        }
-        if (key === 'classname') {
+        key = key.toString()
+        const compareKey = key.toLowerCase()
+        if (compareKey === 'classname') {
           el.className = value
-        } else if (key === 'on') {
+        } else if (compareKey === 'on') {
           Object.entries(value).forEach(([name, value]) => {
             el.setAttribute('on' + name, value)
           })

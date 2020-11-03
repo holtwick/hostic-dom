@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/holtwick/hostic-dom",
   "dependencies": {
-    "css-what": "^3.4.2",
+    "css-what": "^4.0.0",
     "he": "^1.2.0"
   },
   "engines": {
@@ -33,9 +33,9 @@
   "sideEffects": false,
   "devDependencies": {
     "debug": "^4.2.0",
-    "esbuild": "^0.7.14",
+    "esbuild": "^0.8.2",
     "estrella": "^1.2.10",
-    "jest": "^26.5.2"
+    "jest": "^26.6.2"
   },
   "scripts": {
     "build": "node build.js",

@@ -104,6 +104,7 @@ export function hArgumentParser(tag, attrs, ...children) {
 export function hFactory(context) {
   // let context = { document }
   context.h = function h(itag, iattrs, ...ichildren) {
+    // @ts-ignore
     let { tag, attrs, children } = hArgumentParser(itag, iattrs, ichildren)
     return _h(context, tag, attrs, children)
   }

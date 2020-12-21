@@ -1,7 +1,7 @@
 {
   "compilerOptions": {    
-    "target": "ESNext",
-    "module": "ESNext",
+    "target": "es2017",
+    "module": "esnext",
     "jsx": "preserve",
     "allowJs": true,
     "checkJs": true,
@@ -12,13 +12,15 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "baseUrl": ".",
+    "sourceMap": true,    
     "types": ["jest"],
     "paths": {
       "@/*": ["src/*"]
     },
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+    "baseUrl": "src",
+    "rootDirs": ["src"],
+    "outDir": "dist",
   },
   "include": [
     "src/**/*.ts",

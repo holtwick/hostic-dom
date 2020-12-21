@@ -1,37 +1,36 @@
 // Copyright (c) 2020 Dirk Holtwick. All rights reserved. https://holtwick.de/copyright
 
-import { hFactory } from './h'
-import { html } from './html'
-import { matchSelector } from './vcss.js'
+import { hFactory } from "./h"
+import { html } from "./html"
+import { matchSelector } from "./vcss.js"
 
 // For node debugging
-const inspect = Symbol.for('nodejs.util.inspect.custom')
+const inspect = Symbol.for("nodejs.util.inspect.custom")
 
-let B = { 'fontWeight': 'bold' }
-let I = { 'fontStyle': 'italic' }
-let M = { 'backgroundColor': 'rgb(255, 250, 165)' }
-let U = { 'textDecorations': 'underline' }
-let S = { 'textDecorations': 'line-through' }
+let B = { fontWeight: "bold" }
+let I = { fontStyle: "italic" }
+let M = { backgroundColor: "rgb(255, 250, 165)" }
+let U = { textDecorations: "underline" }
+let S = { textDecorations: "line-through" }
 // let C = {}
 
 let DEFAULTS = {
-  'b': B,
-  'strong': B,
-  'em': I,
-  'i': I,
-  'mark': M,
-  'u': U,
-  'a': U,
-  's': S,
-  'del': S,
-  'ins': M,
-  'strike': S,
+  b: B,
+  strong: B,
+  em: I,
+  i: I,
+  mark: M,
+  u: U,
+  a: U,
+  s: S,
+  del: S,
+  ins: M,
+  strike: S,
   // 'code': C,
   // 'tt': C
 }
 
 export class VNode {
-
   static ELEMENT_NODE = 1
   static TEXT_NODE = 3
   static CDATA_SECTION_NODE = 4
@@ -42,13 +41,13 @@ export class VNode {
   static DOCUMENT_FRAGMENT_NODE = 11
 
   get nodeType() {
-    console.error('Subclasses should define nodeType!')
+    console.error("Subclasses should define nodeType!")
     return 0
   }
 
   get nodeName() {
-    console.error('Subclasses should define nodeName!')
-    return ''
+    console.error("Subclasses should define nodeName!")
+    return ""
   }
 
   get nodeValue() {
@@ -61,16 +60,17 @@ export class VNode {
   }
 
   cloneNode(deep = false) {
+    // @ts-ignore
     let node = new this.constructor()
     if (deep) {
-      node._childNodes = this._childNodes.map(c => c.cloneNode(true))
+      node._childNodes = this._childNodes.map((c) => c.cloneNode(true))
       node._fixChildNodesParent()
     }
     return node
   }
 
   _fixChildNodesParent() {
-    this._childNodes.forEach(node => node._parentNode = this)
+    this._childNodes.forEach((node) => (node._parentNode = this))
   }
 
   insertBefore(newNode, node = null) {
@@ -84,21 +84,23 @@ export class VNode {
 
   appendChild(node) {
     if (node === this) {
-      console.warn('Cannot appendChild to self')
+      console.warn("Cannot appendChild to self")
       return
     }
     // log('appendChild', node, this)
 
     if (node instanceof VDocument) {
-      console.warn('No defined how to append a document to a node!', node)
+      console.warn("No defined how to append a document to a node!", node)
     }
 
     if (node instanceof VDocumentFragment) {
-      for (let c of [...node._childNodes]) { // Don't iterate over the original! Do [...el]
+      for (let c of [...node._childNodes]) {
+        // Don't iterate over the original! Do [...el]
         this.appendChild(c)
       }
     } else if (Array.isArray(node)) {
-      for (let c of [...node]) { // Don't iterate over the original! Do [...el]
+      for (let c of [...node]) {
+        // Don't iterate over the original! Do [...el]
         this.appendChild(c)
       }
     } else if (node instanceof VNode) {
@@ -107,10 +109,13 @@ export class VNode {
     } else {
       // Fallback for unknown data
       try {
-        const text = typeof node === 'string' ? node : JSON.stringify(node, null, 2)
+        const text =
+          typeof node === "string" ? node : JSON.stringify(node, null, 2)
         this._childNodes.push(new VTextNode(text))
       } catch (err) {
-        console.error(`The data ${node} to be added to ${this.render()} is problematic: ${err}`)
+        console.error(
+          `The data ${node} to be added to ${this.render()} is problematic: ${err}`
+        )
       }
     }
     this._fixChildNodesParent()
@@ -131,7 +136,9 @@ export class VNode {
   }
 
   replaceChildren(...nodes) {
-    this._childNodes = nodes.map(n => typeof n === 'string' ? new VTextNode(n) : n.remove())
+    this._childNodes = nodes.map((n) =>
+      typeof n === "string" ? new VTextNode(n) : n.remove()
+    )
     this._fixChildNodesParent()
   }
 
@@ -140,7 +147,9 @@ export class VNode {
     if (p) {
       let index = this._indexInParent()
       if (index >= 0) {
-        nodes = nodes.map(n => typeof n === 'string' ? new VTextNode(n) : n.remove())
+        nodes = nodes.map((n) =>
+          typeof n === "string" ? new VTextNode(n) : n.remove()
+        )
         p._childNodes.splice(index, 1, ...nodes)
         this._parentNode = null
         p._fixChildNodesParent()
@@ -191,7 +200,7 @@ export class VNode {
     return null
   }
 
-  flatten({ condition = node => node instanceof VElement } = {}) {
+  flatten({ condition = (node) => node instanceof VElement } = {}) {
     let elements = []
     if (condition(this)) {
       elements.push(this)
@@ -203,11 +212,11 @@ export class VNode {
   }
 
   render() {
-    return ''
+    return ""
   }
 
   get textContent() {
-    return this._childNodes.map(c => c.textContent).join('')
+    return this._childNodes.map((c) => c.textContent).join("")
   }
 
   set textContent(text) {
@@ -220,11 +229,14 @@ export class VNode {
   contains(otherNode) {
     if (otherNode === this) return true
     // if (this._childNodes.includes(otherNode)) return true
-    return this._childNodes.some(n => n.contains(otherNode))
+    return this._childNodes.some((n) => n.contains(otherNode))
   }
 
   get ownerDocument() {
-    if (this.nodeType === VNode.DOCUMENT_NODE || this.nodeType === VNode.DOCUMENT_FRAGMENT_NODE) {
+    if (
+      this.nodeType === VNode.DOCUMENT_NODE ||
+      this.nodeType === VNode.DOCUMENT_FRAGMENT_NODE
+    ) {
       return this
     }
     return this?._parentNode?.ownerDocument
@@ -241,24 +253,23 @@ export class VNode {
 }
 
 export class VTextNode extends VNode {
-
   get nodeType() {
     return VNode.TEXT_NODE
   }
 
   get nodeName() {
-    return '#text'
+    return "#text"
   }
 
   get nodeValue() {
-    return this._text || ''
+    return this._text || ""
   }
 
   get textContent() {
     return this.nodeValue
   }
 
-  constructor(text = '') {
+  constructor(text = "") {
     super()
     this._text = text
   }
@@ -272,17 +283,15 @@ export class VTextNode extends VNode {
     node._text = this._text
     return node
   }
-
 }
 
 export class VNodeQuery extends VNode {
-
   getElementById(name) {
-    return this.flatten().find(e => e._attributes['id'] === name)
+    return this.flatten().find((e) => e._attributes["id"] === name)
   }
 
   getElementsByClassName(name) {
-    return this.flatten().filter(e => e.classList.contains(name))
+    return this.flatten().filter((e) => e.classList.contains(name))
   }
 
   matches(selector) {
@@ -290,11 +299,11 @@ export class VNodeQuery extends VNode {
   }
 
   querySelectorAll(selector) {
-    return this.flatten().filter(e => e.matches(selector))
+    return this.flatten().filter((e) => e.matches(selector))
   }
 
   querySelector(selector) {
-    return this.flatten().find(e => e.matches(selector))
+    return this.flatten().find((e) => e.matches(selector))
   }
 
   //
@@ -315,12 +324,9 @@ export class VNodeQuery extends VNode {
       handler(el, i++)
     }
   }
-
 }
 
-
 export class VElement extends VNodeQuery {
-
   _originalTagName
 
   get nodeType() {
@@ -331,10 +337,10 @@ export class VElement extends VNodeQuery {
     return this._nodeName
   }
 
-  constructor(name = 'div', attrs = {}) {
+  constructor(name = "div", attrs = {}) {
     super()
     this._originalTagName = name
-    this._nodeName = (name || '').toUpperCase()
+    this._nodeName = (name || "").toUpperCase()
     this._attributes = attrs || {}
     this._styles = null
   }
@@ -353,7 +359,9 @@ export class VElement extends VNodeQuery {
 
   _findAttributeName(name) {
     const search = name.toLowerCase()
-    return  Object.keys(this._attributes).find(name => search === name.toLowerCase())
+    return Object.keys(this._attributes).find(
+      (name) => search === name.toLowerCase()
+    )
   }
 
   setAttribute(name, value) {
@@ -382,7 +390,7 @@ export class VElement extends VNodeQuery {
   get style() {
     if (this._styles == null) {
       let styles = Object.assign({}, DEFAULTS[this.tagName.toLowerCase()] || {})
-      let styleString = this.getAttribute('style')
+      let styleString = this.getAttribute("style")
       if (styleString) {
         let m
         let re = /\s*([\w-]+)\s*:\s*([^;]+)/g
@@ -390,7 +398,8 @@ export class VElement extends VNodeQuery {
           let name = m[1]
           let value = m[2].trim()
           styles[name] = value
-          let camel = (s) => s.replace(/[A-Z]/g, '-$&').toLowerCase()
+          let camel = (s) => s.replace(/[A-Z]/g, "-$&").toLowerCase()
+          // @ts-ignore
           styles[camel] = value
         }
       }
@@ -424,24 +433,24 @@ export class VElement extends VNodeQuery {
   getElementsByTagName(name) {
     name = name.toUpperCase()
     let elements = this.flatten()
-    if (name !== '*') {
-      return elements.filter(e => e.tagName === name)
+    if (name !== "*") {
+      return elements.filter((e) => e.tagName === name)
     }
     return elements
   }
 
   // html
 
+  setInnerHTML(html) {
+    throw "setInnerHTML is not implemented; see vdomparser for an example"
+  }
+
   get innerHTML() {
-    return this._childNodes.map(c => c.render(html)).join('')
+    return this._childNodes.map((c) => c.render(html)).join("")
   }
 
   set innerHTML(html) {
-    if (this.setInnerHTML) {
-      this.setInnerHTML(html)
-    } else {
-      throw 'set innerHTML not implemented'
-    }
+    this.setInnerHTML(html)
   }
 
   get outerHTML() {
@@ -451,31 +460,31 @@ export class VElement extends VNodeQuery {
   // class
 
   get className() {
-    return this._attributes['class'] || ''
+    return this._attributes["class"] || ""
   }
 
   set className(name) {
     if (Array.isArray(name)) {
-      name = name.filter(n => !!n).join(' ')
-    } else if (typeof name === 'object') {
-      name = (Object.entries(name)
+      name = name.filter((n) => !!n).join(" ")
+    } else if (typeof name === "object") {
+      name = Object.entries(name)
         .filter(([k, v]) => !!v)
         .map(([k, v]) => k)
-        .join(' '))
+        .join(" ")
     }
-    this._attributes['class'] = name
+    this._attributes["class"] = name
   }
 
   get classList() {
     let self = this
-    let classNames = (this.className || '').trim().split(/\s+/g) || []
+    let classNames = (this.className || "").trim().split(/\s+/g) || []
     // log('classList', classNames)
     return {
       contains(s) {
         return classNames.includes(s)
       },
       add(s) {
-        if (!(classNames.includes(s))) {
+        if (!classNames.includes(s)) {
           classNames.push(s)
           self.className = classNames
         }
@@ -496,13 +505,13 @@ export class VElement extends VNodeQuery {
     return h(
       this._originalTagName || this.tagName,
       this.attributes,
-      this.childNodes.map(c => c.render(h)),
+      this.childNodes.map((c) => c.render(h))
     )
   }
-
 }
 
-export class VDocType extends VNode { //todo
+export class VDocType extends VNode {
+  //todo
 
   name
   publicId
@@ -523,25 +532,26 @@ export class VDocType extends VNode { //todo
   render() {
     return `<!DOCTYPE html>` // hack!
   }
-
 }
 
 export class VDocumentFragment extends VNodeQuery {
+  docType
 
   get nodeType() {
     return VNode.DOCUMENT_FRAGMENT_NODE
   }
 
   get nodeName() {
-    return '#document-fragment'
+    return "#document-fragment"
   }
 
   render(h = html) {
-    return (this._childNodes.map(c => c.render(h) || []).join(''))
+    return this._childNodes.map((c) => c.render(h) || []).join("")
   }
 
-  get innerHTML() { // for debug
-    return this._childNodes.map(c => c.render(html)).join('')
+  get innerHTML() {
+    // for debug
+    return this._childNodes.map((c) => c.render(html)).join("")
   }
 
   createElement(name, attrs = {}) {
@@ -555,11 +565,9 @@ export class VDocumentFragment extends VNodeQuery {
   createTextNode(text) {
     return new VTextNode(text)
   }
-
 }
 
 export class VDocument extends VDocumentFragment {
-
   docType
 
   get nodeType() {
@@ -567,7 +575,7 @@ export class VDocument extends VDocumentFragment {
   }
 
   get nodeName() {
-    return '#document'
+    return "#document"
   }
 
   get documentElement() {
@@ -581,19 +589,17 @@ export class VDocument extends VDocumentFragment {
     }
     return content
   }
-
 }
 
 export class VHTMLDocument extends VDocument {
-
   // doctype
 
   constructor() {
     super()
-    let html = new VElement('html')
-    let body = new VElement('body')
-    let head = new VElement('head')
-    let title = new VElement('title')
+    let html = new VElement("html")
+    let body = new VElement("body")
+    let head = new VElement("head")
+    let title = new VElement("title")
     html.appendChild(head)
     head.appendChild(title)
     html.appendChild(body)
@@ -601,29 +607,29 @@ export class VHTMLDocument extends VDocument {
   }
 
   get body() {
-    return this.querySelector('body')
+    return this.querySelector("body")
   }
 
   get title() {
-    return this.querySelector('title')?.textContent
+    return this.querySelector("title")?.textContent
   }
 
   set title(title) {
-    this.querySelector('title').textContent = title
+    this.querySelector("title").textContent = title
   }
 
   get head() {
-    return this.querySelector('head')
+    return this.querySelector("head")
   }
 
   render(h = html) {
     let content = super.render(h)
-    if (h.firstLine) { // !hack, should be doctype
-      content = h.firstLine + '\n' + content
+    if (h.firstLine) {
+      // !hack, should be doctype
+      content = h.firstLine + "\n" + content
     }
     return content
   }
-
 }
 
 export function createDocument() {

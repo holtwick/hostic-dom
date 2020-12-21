@@ -32,15 +32,20 @@
   "unpkg": "dist/hostic-dom.min.js",
   "sideEffects": false,
   "devDependencies": {
-    "debug": "^4.2.0",
-    "esbuild": "^0.8.2",
-    "estrella": "^1.2.10",
-    "jest": "^26.6.2"
+    "@types/jest": "^26.0.19",
+    "@types/node": "^14.14.14",
+    "debug": "^4.3.1",
+    "esbuild": "^0.8.26",
+    "estrella": "^1.3.0",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "typescript": "^4.1.3"
   },
   "scripts": {
     "build": "node build.js",
     "watch": "node build.js -w",
     "test": "jest --no-cache",
+    "format": "prettier --write .",
     "prepublishOnly": "npm run build && npm test"
   },
   "files": [

@@ -1,5 +1,5 @@
-import { markup } from './html.js'
-import { hArgumentParser } from './h.js'
+import { markup } from "./html.js"
+import { hArgumentParser } from "./h.js"
 
 export function xml(itag, iattrs, ...ichildren) {
   let { tag, attrs, children } = hArgumentParser(itag, iattrs, ichildren)

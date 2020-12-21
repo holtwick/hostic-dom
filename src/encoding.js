@@ -3,17 +3,14 @@
 const rxEscape = /[\-\[\]\/{}()*+?.^$|]/g
 
 export function escapeRegExp(value) {
-  if (!value) return ''
+  if (!value) return ""
   if (value instanceof RegExp) {
     return value.source
   }
-  return value.replace(rxEscape, '\\$&')
+  return value.replace(rxEscape, "\\$&")
 }
 
-export {
-  escape as escapeHTML,
-  unescape as unescapeHTML,
-} from 'he'
+export { escape as escapeHTML, unescape as unescapeHTML } from "he"
 
 // export function escapeHTML(s) {
 //   if (!s) return s

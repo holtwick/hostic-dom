@@ -7,7 +7,7 @@
  */
 
 function _h(context, tag, attrs, children) {
-  if (typeof tag === 'function') {
+  if (typeof tag === "function") {
     return tag.call(null, {
       props: { ...attrs, children },
       attrs,
@@ -18,23 +18,23 @@ function _h(context, tag, attrs, children) {
   } else {
     let el
     if (tag) {
-      if (tag.toLowerCase() === 'fragment') {
+      if (tag.toLowerCase() === "fragment") {
         el = context.document.createDocumentFragment()
       } else {
         el = context.document.createElement(tag)
       }
     } else {
-      el = context.document.createElement('div')
+      el = context.document.createElement("div")
     }
     if (attrs) {
       for (let [key, value] of Object.entries(attrs)) {
         key = key.toString()
         const compareKey = key.toLowerCase()
-        if (compareKey === 'classname') {
+        if (compareKey === "classname") {
           el.className = value
-        } else if (compareKey === 'on') {
+        } else if (compareKey === "on") {
           Object.entries(value).forEach(([name, value]) => {
-            el.setAttribute('on' + name, value)
+            el.setAttribute("on" + name, value)
           })
           // else if (key.indexOf('on') === 0) {
           //   if (el.addEventListener) {
@@ -56,8 +56,10 @@ function _h(context, tag, attrs, children) {
         for (let child of cc) {
           if (child) {
             if (child !== false && child != null) {
-              if (typeof child !== 'object') {
-                el.appendChild(context.document.createTextNode(child.toString()))
+              if (typeof child !== "object") {
+                el.appendChild(
+                  context.document.createTextNode(child.toString())
+                )
               } else {
                 el.appendChild(child)
               }
@@ -71,8 +73,8 @@ function _h(context, tag, attrs, children) {
 }
 
 export function hArgumentParser(tag, attrs, ...children) {
-  if (typeof tag === 'object') {
-    tag = 'fragment'
+  if (typeof tag === "object") {
+    tag = "fragment"
     children = tag.children
     attrs = tag.attrs
   }
@@ -102,6 +104,7 @@ export function hArgumentParser(tag, attrs, ...children) {
 export function hFactory(context) {
   // let context = { document }
   context.h = function h(itag, iattrs, ...ichildren) {
+    // @ts-ignore
     let { tag, attrs, children } = hArgumentParser(itag, iattrs, ichildren)
     return _h(context, tag, attrs, children)
   }

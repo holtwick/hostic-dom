@@ -3,11 +3,11 @@
 module.exports = {
   bundle: true,
   minify: true,
-  target: 'es2015',
+  target: "es2015",
   loader: {
-    '.js': 'jsx',
+    ".js": "jsx",
   },
-  jsxFactory: 'h',
+  jsxFactory: "h",
   // external: [
   //   ...Object.keys(pkg.dependencies ?? {}),
   //   ...Object.keys(pkg.devDependencies ?? {}),

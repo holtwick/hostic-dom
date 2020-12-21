@@ -1,22 +1,23 @@
 // Copyright (c) 2020 Dirk Holtwick. All rights reserved. https://holtwick.de/copyright
 
-import { VDocumentFragment, VElement, VTextNode, document } from './vdom'
-import { VNode } from './vdom'
-import { SELF_CLOSING_TAGS } from './html.js'
-import { unescapeHTML } from './encoding.js'
-import { HtmlParser } from './htmlparser.js'
-import { VDocument } from './vdom.js'
-import { VDocType } from './vdom'
+import { VDocumentFragment, VElement, VTextNode, document } from "./vdom"
+import { VNode } from "./vdom"
+import { SELF_CLOSING_TAGS } from "./html.js"
+import { unescapeHTML } from "./encoding.js"
+import { HtmlParser } from "./htmlparser.js"
+import { VDocument } from "./vdom.js"
+import { VDocType } from "./vdom"
 
 // Makes sure we operate on VNodes
 export function vdom(obj = null) {
   if (obj instanceof VNode) {
     return obj
   }
+  // @ts-ignore
   if (obj instanceof Buffer) {
-    obj = obj.toString('utf-8')
+    obj = obj.toString("utf-8")
   }
-  if (typeof obj === 'string') {
+  if (typeof obj === "string") {
     return parseHTML(obj)
   }
   // console.warn('Cannot convert to VDOM:', obj)
@@ -24,7 +25,7 @@ export function vdom(obj = null) {
 }
 
 export function parseHTML(html) {
-  let frag = html.startsWith('<!') ? new VDocument() : new VDocumentFragment() // !hack
+  let frag = html.startsWith("<!") ? new VDocument() : new VDocumentFragment() // !hack
 
   let stack = [frag]
 
@@ -34,7 +35,7 @@ export function parseHTML(html) {
       startElement(tagName, attrs, isSelfClosing) {
         const lowerTagName = tagName.toLowerCase()
 
-        if (lowerTagName === '!doctype') {
+        if (lowerTagName === "!doctype") {
           frag.docType = new VDocType()
           return
         }
@@ -43,7 +44,7 @@ export function parseHTML(html) {
           if (attrs.hasOwnProperty(name)) {
             let value = attrs[name]
             // console.log(name, value)
-            if (typeof value === 'string') {
+            if (typeof value === "string") {
               attrs[name] = unescapeHTML(value)
             }
           }
@@ -51,7 +52,10 @@ export function parseHTML(html) {
         let parentNode = stack[stack.length - 1]
         const element = document.createElement(tagName, attrs)
         parentNode.appendChild(element)
-        if (!(SELF_CLOSING_TAGS.includes(tagName.toLowerCase()) || isSelfClosing)) {
+        if (
+          !(SELF_CLOSING_TAGS.includes(tagName.toLowerCase()) || isSelfClosing)
+        ) {
+          // @ts-ignore
           stack.push(element)
         }
       },
@@ -67,8 +71,7 @@ export function parseHTML(html) {
           parentNode.appendChild(new VTextNode(text))
         }
       },
-      comment(text) {
-      },
+      comment(text) {},
     },
   })
   parser.parse(html)

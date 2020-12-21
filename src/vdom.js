@@ -399,6 +399,7 @@ export class VElement extends VNodeQuery {
           let value = m[2].trim()
           styles[name] = value
           let camel = (s) => s.replace(/[A-Z]/g, "-$&").toLowerCase()
+          // @ts-ignore
           styles[camel] = value
         }
       }

@@ -55,6 +55,7 @@ export function parseHTML(html) {
         if (
           !(SELF_CLOSING_TAGS.includes(tagName.toLowerCase()) || isSelfClosing)
         ) {
+          // @ts-ignore
           stack.push(element)
         }
       },

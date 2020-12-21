@@ -19,7 +19,7 @@ RewriteRule ^ %{REQUEST_FILENAME}.html [END]
 RewriteRule ^(de|en)\/ $0 [END]
 # - end
 
-# Check for local 
+# Check for local
 #if
 RewriteCond %{HTTP:Accept-Language} ^((?!en).)*de [NC]
 #then
@@ -29,4 +29,3 @@ RewriteRule ^ /en/$0 [L,R=301]
 # - end
 
 ```
-

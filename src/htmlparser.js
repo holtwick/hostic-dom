@@ -16,7 +16,7 @@ const startTagRe = /^<([^>\s\/]+)((\s+[^=>\s]+(\s*=\s*(("[^"]*")|('[^']*')|[^>\s
 const selfCloseTagRe = /\s*\/\s*>\s*$/m
 
 const mustImplementMethod = (name) => {
-  throw new Error(`Must implement the method ${name || ''}`)
+  throw new Error(`Must implement the method ${name || ""}`)
 }
 
 /**
@@ -40,8 +40,8 @@ export class HtmlParser {
     let index, match, characters
     while (html.length) {
       // comment
-      if (html.substring(0, 4) === '<!--') {
-        index = html.indexOf('-->')
+      if (html.substring(0, 4) === "<!--") {
+        index = html.indexOf("-->")
         if (index !== -1) {
           this.scanner.comment(html.substring(4, index))
           html = html.substring(index + 3)
@@ -51,7 +51,7 @@ export class HtmlParser {
         }
       }
       // end tag
-      else if (html.substring(0, 2) === '</') {
+      else if (html.substring(0, 2) === "</") {
         match = this.endTagRe.exec(html)
         if (match) {
           html = RegExp.rightContext
@@ -62,7 +62,7 @@ export class HtmlParser {
         }
       }
       // start tag
-      else if (html.charAt(0) === '<') {
+      else if (html.charAt(0) === "<") {
         match = this.startTagRe.exec(html)
         if (match) {
           html = RegExp.rightContext
@@ -74,15 +74,16 @@ export class HtmlParser {
       }
 
       if (treatAsChars) {
-        index = html.indexOf('<')
+        index = html.indexOf("<")
 
-        if (index === 0) { // First char is a < so find the next one
-          index = html.substring(1).indexOf('<')
+        if (index === 0) {
+          // First char is a < so find the next one
+          index = html.substring(1).indexOf("<")
         }
 
         if (index === -1) {
           characters = html
-          html = ''
+          html = ""
         } else {
           characters = html.substring(0, index)
           html = html.substring(index)
@@ -102,7 +103,7 @@ export class HtmlParser {
     const isSelfColse = selfCloseTagRe.test(input)
     let attrInput = match[2]
     if (isSelfColse) {
-      attrInput = attrInput.replace(/\s*\/\s*$/, '')
+      attrInput = attrInput.replace(/\s*\/\s*$/, "")
     }
     const attrs = this.parseAttributes(tagName, attrInput)
     this.scanner.startElement(tagName, attrs, isSelfColse, match[0])
@@ -114,9 +115,12 @@ export class HtmlParser {
 
   parseAttributes(tagName, input) {
     const attrs = {}
-    input.replace(this.attrRe, (attr, name, c2, value, c4, valueInQuote, c6, valueInSingleQuote) => {
-      attrs[name] = valueInSingleQuote ?? valueInQuote ?? value ?? true
-    })
+    input.replace(
+      this.attrRe,
+      (attr, name, c2, value, c4, valueInQuote, c6, valueInSingleQuote) => {
+        attrs[name] = valueInSingleQuote ?? valueInQuote ?? value ?? true
+      }
+    )
     return attrs
   }
 }
@@ -130,16 +134,15 @@ HtmlParser.prototype.endTagRe = endTagRe
 HtmlParser.prototype.startTagRe = startTagRe
 HtmlParser.prototype.scanner = {
   startElement() {
-    mustImplementMethod('startElement')
+    mustImplementMethod("startElement")
   },
   endElement() {
-    mustImplementMethod('endElement')
+    mustImplementMethod("endElement")
   },
   characters() {
-    mustImplementMethod('characters')
+    mustImplementMethod("characters")
   },
   comment() {
-    mustImplementMethod('comment')
+    mustImplementMethod("comment")
   },
 }
-

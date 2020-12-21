@@ -30,7 +30,6 @@
   "main": "dist/hostic-dom.cjs.js",
   "module": "dist/hostic-dom.esm.js",
   "unpkg": "dist/hostic-dom.min.js",
-  "typings": "dist/hostic-dom.d.ts",
   "sideEffects": false,
   "devDependencies": {
     "@types/jest": "^26.0.19",

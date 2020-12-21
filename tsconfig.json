@@ -1,9 +1,10 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "esnext",
+  "compilerOptions": {    
+    "target": "ESNext",
+    "module": "ESNext",
     "jsx": "preserve",
     "allowJs": true,
+    "checkJs": true,
     "strict": false,
     "importHelpers": true,
     "moduleResolution": "node",
@@ -12,7 +13,7 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "types": ["webpack-env", "jest"],
+    "types": ["jest"],
     "paths": {
       "@/*": ["src/*"]
     },

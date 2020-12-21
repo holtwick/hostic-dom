@@ -60,6 +60,7 @@ export class VNode {
   }
 
   cloneNode(deep = false) {
+    // @ts-ignore
     let node = new this.constructor()
     if (deep) {
       node._childNodes = this._childNodes.map((c) => c.cloneNode(true))
@@ -439,16 +440,16 @@ export class VElement extends VNodeQuery {
 
   // html
 
+  setInnerHTML(html) {
+    throw "setInnerHTML is not implemented; see vdomparser for an example"
+  }
+
   get innerHTML() {
     return this._childNodes.map((c) => c.render(html)).join("")
   }
 
   set innerHTML(html) {
-    if (this.setInnerHTML) {
-      this.setInnerHTML(html)
-    } else {
-      throw "set innerHTML not implemented"
-    }
+    this.setInnerHTML(html)
   }
 
   get outerHTML() {
@@ -533,6 +534,8 @@ export class VDocType extends VNode {
 }
 
 export class VDocumentFragment extends VNodeQuery {
+  docType
+
   get nodeType() {
     return VNode.DOCUMENT_FRAGMENT_NODE
   }

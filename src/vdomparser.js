@@ -13,6 +13,7 @@ export function vdom(obj = null) {
   if (obj instanceof VNode) {
     return obj
   }
+  // @ts-ignore
   if (obj instanceof Buffer) {
     obj = obj.toString("utf-8")
   }

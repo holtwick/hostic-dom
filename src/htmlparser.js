@@ -54,6 +54,7 @@ export class HtmlParser {
       else if (html.substring(0, 2) === "</") {
         match = this.endTagRe.exec(html)
         if (match) {
+          // @ts-ignore
           html = RegExp.rightContext
           treatAsChars = false
           this.parseEndTag(RegExp.lastMatch, match[1])
@@ -65,6 +66,7 @@ export class HtmlParser {
       else if (html.charAt(0) === "<") {
         match = this.startTagRe.exec(html)
         if (match) {
+          // @ts-ignore
           html = RegExp.rightContext
           treatAsChars = false
           this.parseStartTag(RegExp.lastMatch, match[1], match)
@@ -109,14 +111,17 @@ export class HtmlParser {
     this.scanner.startElement(tagName, attrs, isSelfColse, match[0])
   }
 
+  // @ts-ignore
   parseEndTag(input, tagName) {
     this.scanner.endElement(tagName)
   }
 
+  // @ts-ignore
   parseAttributes(tagName, input) {
     const attrs = {}
     input.replace(
       this.attrRe,
+      // @ts-ignore
       (attr, name, c2, value, c4, valueInQuote, c6, valueInSingleQuote) => {
         attrs[name] = valueInSingleQuote ?? valueInQuote ?? value ?? true
       }

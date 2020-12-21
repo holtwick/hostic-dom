@@ -23,7 +23,7 @@ export function matchSelector(selector, element, { debug = false } = {}) {
       console.log("Element:", element)
     }
 
-    function handleRules(element, rules) {
+    const handleRules = (element, rules) => {
       let success = false
       for (let part of rules) {
         const { type, name, action, value, ignoreCase = true, data } = part

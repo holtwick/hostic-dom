@@ -646,11 +646,11 @@ export class VHTMLDocument extends VDocument {
   }
 }
 
-export function createDocument() {
+export function createDocument(): VDocument {
   return new VDocument()
 }
 
-export function createHTMLDocument() {
+export function createHTMLDocument(): VHTMLDocument {
   return new VHTMLDocument()
 }
 

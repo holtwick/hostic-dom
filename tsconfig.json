@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es2017",
     "module": "esnext",
+    "target": "es5",
     "jsx": "preserve",
     "allowJs": true,
-    "checkJs": true,
+    "checkJs": false,
     "strict": false,
     "declaration": true,
     "importHelpers": true,
@@ -20,16 +20,9 @@
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "baseUrl": "src",
     "rootDirs": ["src"],
+    "jsxFactory": "h",
     "outDir": "dist"
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.js",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.js",
-    "tests/**/*.tsx"
-  ],
-  "exclude": ["node_modules"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

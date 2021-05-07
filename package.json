@@ -27,41 +27,32 @@
   "engines": {
     "node": ">=12"
   },
-  "main": "dist/hostic-dom.cjs.js",
-  "module": "dist/hostic-dom.esm.js",
-  "unpkg": "dist/hostic-dom.min.js",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "exports": {
-    "default": "./dist/hostic-dom.esm.js"
+    "default": "./dist/index.js"
   },
   "sideEffects": false,
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@types/node": "^15.0.2",
     "debug": "^4.3.1",
-    "esbuild": "^0.11.19",
-    "estrella": "^1.4.0",
     "jest": "^26.6.3",
     "prettier": "^2.2.1",
+    "ts-jest": "^26.5.6",
     "typescript": "^4.2.4"
   },
   "scripts": {
-    "build": "node build.js",
-    "watch": "node build.js -w",
-    "test": "jest --no-cache",
+    "start": "npm run watch",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "clean": "rm -rf dist",
+    "watch": "tsc -w -p tsconfig.json",
+    "test": "jest src --no-cache",
     "format": "prettier --write .",
     "prepublishOnly": "npm run build && npm test"
   },
   "files": [
     "dist"
-  ],
-  "jest": {
-    "transform": {
-      "^.+\\.jsx?$": "./build.jest.js"
-    },
-    "testEnvironment": "node",
-    "testPathIgnorePatterns": [
-      "node_modules/",
-      "dist/"
-    ]
-  }
+  ]
 }

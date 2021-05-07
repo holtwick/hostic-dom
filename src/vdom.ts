@@ -40,6 +40,9 @@ export class VNode {
   static DOCUMENT_TYPE_NODE = 10
   static DOCUMENT_FRAGMENT_NODE = 11
 
+  _parentNode: any
+  _childNodes: any[]
+
   get nodeType() {
     console.error("Subclasses should define nodeType!")
     return 0
@@ -94,6 +97,7 @@ export class VNode {
     }
 
     if (node instanceof VDocumentFragment) {
+      // @ts-ignore
       for (let c of [...node._childNodes]) {
         // Don't iterate over the original! Do [...el]
         this.appendChild(c)
@@ -253,6 +257,7 @@ export class VNode {
 }
 
 export class VTextNode extends VNode {
+  _text: string
   get nodeType() {
     return VNode.TEXT_NODE
   }
@@ -328,6 +333,9 @@ export class VNodeQuery extends VNode {
 
 export class VElement extends VNodeQuery {
   _originalTagName
+  _nodeName: any
+  _attributes: object
+  _styles: any
 
   get nodeType() {
     return VNode.ELEMENT_NODE
@@ -412,19 +420,23 @@ export class VElement extends VNodeQuery {
     return this._nodeName
   }
 
-  get id() {
+  get id(): string {
+    // @ts-ignore
     return this._attributes.id
   }
 
   set id(value) {
+    // @ts-ignore
     this._attributes.id = value
   }
 
   get src() {
+    // @ts-ignore
     return this._attributes.src
   }
 
   set src(value) {
+    // @ts-ignore
     this._attributes.src = value
   }
 
@@ -537,7 +549,7 @@ export class VDocType extends VNode {
 }
 
 export class VDocumentFragment extends VNodeQuery {
-  docType
+  docType: string
 
   get nodeType() {
     return VNode.DOCUMENT_FRAGMENT_NODE

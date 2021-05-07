@@ -2,7 +2,6 @@
   "compilerOptions": {
     "module": "esnext",
     "target": "es5",
-    "jsx": "preserve",
     "allowJs": true,
     "checkJs": false,
     "strict": false,
@@ -20,7 +19,9 @@
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "baseUrl": "src",
     "rootDirs": ["src"],
+    "jsx": "react",
     "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
     "outDir": "dist"
   },
   "include": ["src"],

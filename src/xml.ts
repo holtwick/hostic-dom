@@ -1,7 +1,7 @@
 import { hArgumentParser } from "./h"
 import { markup } from "./html"
 
-export function xml(itag, iattrs, ...ichildren) {
+export function xml(itag: string, iattrs?: object, ...ichildren: any[]) {
   let { tag, attrs, children } = hArgumentParser(itag, iattrs, ichildren)
   return markup(true, tag, attrs, children)
 }

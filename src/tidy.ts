@@ -9,7 +9,7 @@ function level(element) {
   return indent.substr(2)
 }
 
-export function tidyDOM(document, opt) {
+export function tidyDOM(document, opt = {}) {
   let selector =
     "meta,link,script,p,h1,h2,h3,h4,h5,h6,blockquote,div,ul,ol,li,article,section,footer,head,body,title,nav,section,article,hr,form"
   document.handle(selector, (e) => {

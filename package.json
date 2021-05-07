@@ -22,7 +22,8 @@
   "homepage": "https://github.com/holtwick/hostic-dom",
   "dependencies": {
     "css-what": "^5.0.0",
-    "he": "^1.2.0"
+    "he": "^1.2.0",
+    "tslib": "^2.2.0"
   },
   "engines": {
     "node": ">=12"

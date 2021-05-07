@@ -1,10 +1,9 @@
 // Copyright (c) 2020 Dirk Holtwick. All rights reserved. https://holtwick.de/copyright
 
 // import Sizzle from './sizzle'
-import { VDocument, VDocumentFragment, h } from "./vdom"
-import { xml } from "./xml.js"
-import { parseHTML } from "./vdomparser.js"
-import { createHTMLDocument } from "./vdom.js"
+import { createHTMLDocument, h, VDocument, VDocumentFragment } from "./vdom"
+import { parseHTML } from "./vdomparser"
+import { xml } from "./xml"
 
 describe("VDOM", () => {
   it("should mimic DOM", () => {

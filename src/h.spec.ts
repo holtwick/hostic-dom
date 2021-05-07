@@ -1,4 +1,4 @@
-import { hArgumentParser } from "./h.js"
+import { hArgumentParser } from "./h"
 
 describe("h", () => {
   it("should flatten", () => {

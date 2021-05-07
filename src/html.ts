@@ -7,7 +7,7 @@
 
 // TODO: Probably use this instead of html.js
 
-import { hArgumentParser } from "./h.js"
+import { hArgumentParser } from "./h"
 import { escapeHTML } from "./encoding"
 
 export const SELF_CLOSING_TAGS = [
@@ -143,7 +143,8 @@ export function markup(xmlMode, tag, attrs, children) {
   return s
 }
 
-export function html(itag, iattrs, ...ichildren) {
+export function html(itag: string, iattrs?: object, ...ichildren: any[]) {
+  // @ts-ignore
   let { tag, attrs, children } = hArgumentParser(itag, iattrs, ichildren)
   return markup(false, tag, attrs, children)
 }

@@ -1,4 +1,5 @@
 // Copyright (c) 2020 Dirk Holtwick. All rights reserved. https://holtwick.de/copyright
+/** @jsx h */
 
 import { html as h } from "./html"
 
@@ -25,6 +26,7 @@ describe("HTML", () => {
         <b>Welcome</b>
       </a>
     )
+
     expect(s).toEqual(
       '<a href="example.com" x="x" title="Hello" id="greeting"><hr myCaseSensitiveAttribute="1"><b>Welcome</b></a>'
     )

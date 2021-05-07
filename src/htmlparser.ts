@@ -26,13 +26,20 @@ const mustImplementMethod = (name) => {
  * http://erik.eae.net/simplehtmlparser/simplehtmlparser.js
  */
 export class HtmlParser {
+  scanner: any
+  options: any
+  attrRe = attrRe
+  endTagRe = endTagRe
+  startTagRe = startTagRe
+  defaults = { ignoreWhitespaceText: false }
+
   constructor(options) {
     options = options || {}
     if (options.scanner) {
       this.scanner = options.scanner
       options.scanner = null
     }
-    this.options = Object.assign({}, HtmlParser.defaults, options)
+    this.options = Object.assign({}, this.defaults, options)
   }
 
   parse(html) {
@@ -130,24 +137,20 @@ export class HtmlParser {
   }
 }
 
-HtmlParser.defaults = {
-  ignoreWhitespaceText: false,
-}
-
-HtmlParser.prototype.attrRe = attrRe
-HtmlParser.prototype.endTagRe = endTagRe
-HtmlParser.prototype.startTagRe = startTagRe
-HtmlParser.prototype.scanner = {
-  startElement() {
-    mustImplementMethod("startElement")
-  },
-  endElement() {
-    mustImplementMethod("endElement")
-  },
-  characters() {
-    mustImplementMethod("characters")
-  },
-  comment() {
-    mustImplementMethod("comment")
-  },
-}
+// HtmlParser.defaults = {
+//   ignoreWhitespaceText: false,
+// }
+// HtmlParser.prototype.scanner = {
+//   startElement() {
+//     mustImplementMethod("startElement")
+//   },
+//   endElement() {
+//     mustImplementMethod("endElement")
+//   },
+//   characters() {
+//     mustImplementMethod("characters")
+//   },
+//   comment() {
+//     mustImplementMethod("comment")
+//   },
+// }

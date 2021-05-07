@@ -1,10 +1,9 @@
 {
-  "compilerOptions": {    
-    "target": "es2017",
+  "compilerOptions": {
     "module": "esnext",
-    "jsx": "preserve",
+    "target": "es5",
     "allowJs": true,
-    "checkJs": true,
+    "checkJs": false,
     "strict": false,
     "declaration": true,
     "importHelpers": true,
@@ -12,7 +11,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "sourceMap": true,    
+    "sourceMap": true,
     "types": ["jest", "node"],
     "paths": {
       "@/*": ["src/*"]
@@ -20,16 +19,11 @@
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "baseUrl": "src",
     "rootDirs": ["src"],
-    "outDir": "dist" 
+    "jsx": "react",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
+    "outDir": "dist"
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.js",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.js",
-    "tests/**/*.tsx"
-  ],
-  "exclude": ["node_modules"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

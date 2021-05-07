@@ -1,12 +1,17 @@
 // Copyright (c) 2020 Dirk Holtwick. All rights reserved. https://holtwick.de/copyright
 
-import { VDocumentFragment, VElement, VTextNode, document } from "./vdom"
-import { VNode } from "./vdom"
-import { SELF_CLOSING_TAGS } from "./html.js"
-import { unescapeHTML } from "./encoding.js"
-import { HtmlParser } from "./htmlparser.js"
-import { VDocument } from "./vdom.js"
-import { VDocType } from "./vdom"
+import { unescapeHTML } from "./encoding"
+import { SELF_CLOSING_TAGS } from "./html"
+import { HtmlParser } from "./htmlparser"
+import {
+  document,
+  VDocType,
+  VDocument,
+  VDocumentFragment,
+  VElement,
+  VNode,
+  VTextNode,
+} from "./vdom"
 
 // Makes sure we operate on VNodes
 export function vdom(obj = null) {

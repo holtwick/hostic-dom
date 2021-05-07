@@ -1,14 +1,27 @@
 // Copyright (c) 2020 Dirk Holtwick. All rights reserved. https://holtwick.de/copyright
 
+import { VDocument, VDocumentFragment } from "vdom"
+
 /*
  * Abstraction for h/jsx like DOM descriptions.
  * It is used in DOM, VDOM
  *
  */
 
-function _h(context, tag, attrs, children) {
+interface Context {
+  h?: any
+  document: VDocument | VDocumentFragment
+}
+
+function _h(
+  context: Context,
+  tag: string | ((a0: any) => string),
+  attrs: object,
+  children: any[]
+): string {
   if (typeof tag === "function") {
     return tag.call(null, {
+      // @ts-ignore
       props: { ...attrs, children },
       attrs,
       children,
@@ -72,7 +85,7 @@ function _h(context, tag, attrs, children) {
   }
 }
 
-export function hArgumentParser(tag, attrs, ...children) {
+export function hArgumentParser(tag: any, attrs: any, ...children: any[]) {
   if (typeof tag === "object") {
     tag = "fragment"
     children = tag.children
@@ -101,9 +114,9 @@ export function hArgumentParser(tag, attrs, ...children) {
 //   console.log('hh', args)
 // }
 
-export function hFactory(context) {
+export function hFactory(context: Context) {
   // let context = { document }
-  context.h = function h(itag, iattrs, ...ichildren) {
+  context.h = function h(itag: any, iattrs: any, ...ichildren: any[]) {
     // @ts-ignore
     let { tag, attrs, children } = hArgumentParser(itag, iattrs, ichildren)
     return _h(context, tag, attrs, children)

@@ -1,6 +1,5 @@
-import { matchSelector } from "./vcss.js"
-import { h } from "./vdom.js"
-import { createHTMLDocument } from "./vdom.js"
+import { matchSelector } from "./vcss"
+import { createHTMLDocument, h } from "./vdom"
 
 let _keepH = h
 

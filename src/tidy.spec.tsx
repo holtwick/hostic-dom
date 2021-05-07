@@ -1,6 +1,5 @@
-import { h } from "./vdom.js"
-import { createHTMLDocument } from "./vdom.js"
-import { tidyDOM } from "./tidy.js"
+import { tidyDOM } from "./tidy"
+import { createHTMLDocument, h } from "./vdom"
 
 let _keepH = h
 

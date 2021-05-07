@@ -9,6 +9,7 @@
 function _h(context, tag, attrs, children) {
   if (typeof tag === "function") {
     return tag.call(null, {
+      // @ts-ignore
       props: { ...attrs, children },
       attrs,
       children,

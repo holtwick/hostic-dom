@@ -1,5 +1,4 @@
-import { VNode } from "./vdom.js"
-import { VTextNode } from "./vdom.js"
+import { VNode, VTextNode } from "./vdom"
 
 function level(element) {
   let indent = ""

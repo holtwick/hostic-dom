@@ -1,4 +1,4 @@
-import { vdom } from "./vdomparser.js"
+import { vdom } from "./vdomparser"
 
 export function removeBodyContainer(body) {
   let ehead = body.querySelector("head")

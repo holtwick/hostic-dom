@@ -1,5 +1,5 @@
-import { createHTMLDocument } from "./vdom.js"
-import { removeBodyContainer } from "./utils.js"
+import { createHTMLDocument } from "./vdom"
+import { removeBodyContainer } from "./utils"
 
 describe("Utils", () => {
   it("should remove doc stuff", () => {

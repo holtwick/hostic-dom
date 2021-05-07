@@ -2,7 +2,7 @@
 
 import { hFactory } from "./h"
 import { html } from "./html"
-import { matchSelector } from "./vcss.js"
+import { matchSelector } from "./vcss"
 
 // For node debugging
 const inspect = Symbol.for("nodejs.util.inspect.custom")
@@ -518,10 +518,12 @@ export class VDocType extends VNode {
   systemId
 
   get nodeName() {
+    // @ts-ignore
     return super.nodeName
   }
 
   get nodeValue() {
+    // @ts-ignore
     return super.nodeValue
   }
 

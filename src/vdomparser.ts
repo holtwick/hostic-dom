@@ -10,11 +10,12 @@ import {
   VDocumentFragment,
   VElement,
   VNode,
+  VNodeQuery,
   VTextNode,
 } from "./vdom"
 
 // Makes sure we operate on VNodes
-export function vdom(obj = null) {
+export function vdom(obj = null): VNode {
   if (obj instanceof VNode) {
     return obj
   }
@@ -29,7 +30,7 @@ export function vdom(obj = null) {
   return new VDocumentFragment()
 }
 
-export function parseHTML(html) {
+export function parseHTML(html: string): VDocumentFragment {
   let frag = html.startsWith("<!") ? new VDocument() : new VDocumentFragment() // !hack
 
   let stack = [frag]

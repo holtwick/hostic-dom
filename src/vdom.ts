@@ -291,7 +291,7 @@ export class VTextNode extends VNode {
 }
 
 export class VNodeQuery extends VNode {
-  getElementById(name) {
+  getElementById(name: string) {
     return this.flatten().find((e) => e._attributes["id"] === name)
   }
 
@@ -299,7 +299,7 @@ export class VNodeQuery extends VNode {
     return this.flatten().filter((e) => e.classList.contains(name))
   }
 
-  matches(selector) {
+  matches(selector: string) {
     return matchSelector(selector, this)
   }
 
@@ -568,7 +568,7 @@ export class VDocumentFragment extends VNodeQuery {
     return this._childNodes.map((c) => c.render(html)).join("")
   }
 
-  createElement(name, attrs = {}) {
+  createElement(name: string, attrs = {}) {
     return new VElement(name, attrs)
   }
 
@@ -576,7 +576,7 @@ export class VDocumentFragment extends VNodeQuery {
     return new VDocumentFragment()
   }
 
-  createTextNode(text) {
+  createTextNode(text?: string) {
     return new VTextNode(text)
   }
 }

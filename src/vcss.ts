@@ -1,10 +1,11 @@
 import { parse } from "css-what"
+import { VNodeQuery } from "./vdom"
 
 // Alternative could be https://github.com/leaverou/parsel
 
 let cache = {}
 
-export function parseSelector(selector) {
+export function parseSelector(selector: string) {
   let ast = cache[selector]
   if (ast == null) {
     ast = parse(selector)
@@ -15,7 +16,11 @@ export function parseSelector(selector) {
 
 // Just a very small subset for now: https://github.com/fb55/css-what#api
 
-export function matchSelector(selector, element, { debug = false } = {}) {
+export function matchSelector(
+  selector: string,
+  element: VNodeQuery,
+  { debug = false } = {}
+) {
   for (let rules of parseSelector(selector)) {
     if (debug) {
       console.log("Selector:", selector)

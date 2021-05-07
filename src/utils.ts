@@ -1,12 +1,13 @@
-import { vdom } from "./vdomparser"
+import { VDocumentFragment, VNodeQuery } from "./vdom"
 
-export function removeBodyContainer(body) {
+export function removeBodyContainer(body: VNodeQuery): VNodeQuery {
   let ehead = body.querySelector("head")
   let ebody = body.querySelector("body")
   if (ebody || ehead) {
-    body = vdom()
+    let body = new VDocumentFragment()
     ehead && body.appendChild(ehead.childNodes)
     ebody && body.appendChild(ebody.children)
+    return body
   }
   return body
 }

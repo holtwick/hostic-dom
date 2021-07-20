@@ -4,6 +4,9 @@ import { hFactory } from "./h"
 import { html } from "./html"
 import { matchSelector } from "./vcss.js"
 
+const camalize = (str) =>
+  str.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase())
+
 // For node debugging
 const inspect = Symbol.for("nodejs.util.inspect.custom")
 
@@ -397,10 +400,7 @@ export class VElement extends VNodeQuery {
         while ((m = re.exec(styleString))) {
           let name = m[1]
           let value = m[2].trim()
-          styles[name] = value
-          let camel = (s) => s.replace(/[A-Z]/g, "-$&").toLowerCase()
-          // @ts-ignore
-          styles[camel] = value
+          styles[camalize(name)] = value
         }
       }
       this._styles = styles

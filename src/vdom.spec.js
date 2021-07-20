@@ -26,6 +26,20 @@ describe("VDOM", () => {
     expect(html).toBe('<p class="foo">Some</p>')
   })
 
+  it("should convert styles key to camel case", () => {
+    let document = new VDocument()
+    let frag = new VDocumentFragment()
+    let p = document.createElement("p")
+    p.setAttribute("style", "text-align: center; background-color: red;")
+    frag.appendChild(p)
+    let html = frag.render()
+    expect(p.style.textAlign).toBe("center")
+    expect(p.style.backgroundColor).toBe("red")
+    expect(html).toBe(
+      '<p style="text-align: center; background-color: red;"></p>'
+    )
+  })
+
   it("should have functional factory", () => {
     let doc = createHTMLDocument()
 

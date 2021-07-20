@@ -4,7 +4,8 @@ import { hFactory } from "./h"
 import { html } from "./html"
 import { matchSelector } from "./vcss.js"
 
-const camalize = (str) => str.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase())
+const camalize = (str) =>
+  str.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase())
 
 // For node debugging
 const inspect = Symbol.for("nodejs.util.inspect.custom")

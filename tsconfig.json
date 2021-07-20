@@ -1,5 +1,5 @@
 {
-  "compilerOptions": {    
+  "compilerOptions": {
     "target": "es2017",
     "module": "esnext",
     "jsx": "preserve",
@@ -12,7 +12,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "sourceMap": true,    
+    "sourceMap": true,
     "types": ["jest", "node"],
     "paths": {
       "@/*": ["src/*"]
@@ -20,7 +20,7 @@
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "baseUrl": "src",
     "rootDirs": ["src"],
-    "outDir": "dist" 
+    "outDir": "dist"
   },
   "include": [
     "src/**/*.ts",

@@ -1,3 +1,5 @@
+> **This project is inactive, please consider moving to the fully compatible [zeed-dom](https://github.com/holtwick/zeed-dom) with ESM and Typescript support**
+
 # hostic-dom
 
 - Lightweight virtual DOM in pure Javascript
